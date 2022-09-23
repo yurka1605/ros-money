@@ -6,6 +6,8 @@
 @import './header.css';
 @import './footer.css';
 @import './blocks/main.css';
+@import './blocks/stock.css';
+@import './blocks/feedback.css';
 
 body {
   font-family: 'Gotham Pro', sans-serif;
@@ -16,7 +18,6 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   color: #270205;
-  padding: var(--header-height) 0 var(--footer-height) 0;
   background: #F5F5F5;
 }
 
@@ -24,9 +25,17 @@ body {
   display: block;
   margin: 0 auto;
   width: calc(100% - 32px);
-  height: calc(100vh - (var(--header-height) + var(--footer-height)));
-  background: #F5F5F5;
-  /* overflow-y: auto; */
+  height: 100vh;
+  padding: var(--header-height) 0 var(--footer-height) 0;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.block h2 {
+  padding-top: 28px;
+  font-size: 25px;
+  line-height: 24px;
+  text-align: center;
 }
 
 ul {
@@ -50,4 +59,31 @@ textarea {
 
 .pointer {
   cursor: pointer;
+}
+
+.slick-slide {
+  box-shadow: 0px 4px 10px -4px rgba(39, 2, 5, 0.06);
+  border-radius: 4px;
+}
+
+.slick-dots li button {
+  width: 10px;
+  height: 10px;
+  background: #E2E2E2;
+  border-radius: 50%;
+}
+
+.slick-dots li button:before {
+  content: none;
+}
+
+.slick-dots li.slick-active button {
+  background: #E30016;
+}
+
+
+.tap-block {
+  display: flex;
+  justify-content: flex-end;
+  padding: 4px 0 10px 0;
 }
