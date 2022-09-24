@@ -1,7 +1,25 @@
 $(document).ready(function() {
   initRangeSliders();
   initSlick();
+  initVideos();
+  initAccordion();
 });
+
+function initAccordion() {
+  $('.accordion').each(function() {
+    $(this).accordion();
+  });
+}
+
+function initVideos() {
+  $("iframe").prepend("Some prepended text.");
+  const iframeWidth = $('.carousel-feedbacks__item').width();
+  const $iframe = $('.carousel-feedbacks__item iframe');
+  $iframe.attr('width', iframeWidth);
+  $iframe.on('click', function() {
+    $('.play-btn').toggle('.hide');
+  });
+}
 
 function initSlick() {
   $('.carousel').slick({

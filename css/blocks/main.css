@@ -44,7 +44,7 @@
 }
 
 .calc {
-  height: calc(100% - 124px);
+  height: auto;
   background: #FFFFFF;
   box-shadow: 0px 7.1px 17.3556px 1.57778px rgba(8, 34, 94, 0.09);
   border-radius: 12px;
