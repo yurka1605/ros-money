@@ -37,13 +37,22 @@ $(document).ready(function() {
       dialogConfig.close();
       $('.footer-item--money').removeClass('footer-item--active');
     },
-
-    autoOpen: true,
   });
 
   $( ".footer-item--money, .calc-submit" ).on( "click", function(e) {
     e.preventDefault();
     openDialog(money, $(this));
+  });
+
+  $('.calc-change').on('click', function() {
+    money.dialog("close");
+    $("html, body").animate({
+      scrollTop: $('#calculator').offset().top + "px"
+    }, {
+        duration: 500,
+        easing: "swing"
+    });
+    return false;
   });
 });
 

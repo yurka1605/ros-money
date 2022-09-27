@@ -5,6 +5,19 @@ $(document).ready(function() {
   initAccordion();
   initInputs();
   initSelects();
+
+  $('.menu-item a').each(function() {
+    $(this).on('click', function(e) {
+      e.preventDefault();
+      $("html, body").animate({
+        scrollTop: $($(this).attr('href')).offset().top + "px"
+      }, {
+          duration: 500,
+          easing: "swing"
+      });
+      return false;
+    });
+  });
 });
 
 function initSelects() {
@@ -72,8 +85,6 @@ function initSlick() {
 }
 
 function initRangeSliders() {
-  $date = $('.calc-summary__item--date .calc-summary__value');
-  $summ = $('.calc-summary__item--summ .calc-summary__value');
   $('.range-slider').each(function() {
     var min = Number($(this).attr('data-min')),
         max = Number($(this).attr('data-max')),
@@ -92,14 +103,14 @@ function initRangeSliders() {
       change: function(event, {value}) {
         const valueNode = $this?.prev()?.children()?.last('.calc-label__summ');
         if (valueNode) {
-          const newValue = value >= 10000 ? `${value / 1000} 000`  : value;
           if (separator !== '₽') {
             separator = getDataSeparator(value);
           }
 
-          const strVal = `${newValue} ${separator}`;
+          const strVal = `${separateSummClasses(value)} ${separator}`;
           valueNode.text(strVal);
-          separator === '₽' ? $summ.text(strVal) : setCalcDate(value);
+          separator === '₽' ? setSumm(strVal) : setCalcDate(value);
+          setFinalSumm();
         }
       }
     });
@@ -128,6 +139,47 @@ function getDataSeparator(value) {
   }
 }
 
+function separateSummClasses(value) {
+  if (value >= 10000) {
+    const thousand = Math.floor(value / 1000);
+    const hundred = value - thousand*1000;
+    let remainder;
+    switch (`${hundred}`.length) {
+      case 1:
+        remainder = `${hundred}00`;
+        break;
+      case 2:
+        remainder = `${hundred}0`;
+        break;
+    
+      default:
+        remainder = hundred;
+        break;
+    }
+    return `${thousand} ${remainder}`;
+  } else {
+    return value;
+  }
+}
+
+function setSumm(val) {
+  $('.calc-summary__item--summ .calc-summary__value').text(val);
+  $('.calc-param--summ .calc-param__value').text(val);
+}
+
 function setCalcDate(value) {
-  $date.text(moment().add(value, 'd').format('DD.MM.YYYY'));
+  const date = moment().add(value, 'd').format('DD.MM.YYYY');
+  $('.calc-summary__item--date .calc-summary__value').text(date);
+  $('.calc-date .calc-param__value').text(date);
+}
+
+function setFinalSumm() {
+  const days = +$('.calc-label--days .calc-label__summ')
+    .text().split(' ').slice(0, -1).join('');
+  const summ = +$('.calc-summary__item--summ .calc-summary__value')
+    .text().split(' ').slice(0, -1).join('');
+  const finalSumm = summ + (summ * 0.01) * days;
+  $('.calc-param--final-summ .calc-param__value').text(
+    `${separateSummClasses(finalSumm)} ₽`
+  );
 }
