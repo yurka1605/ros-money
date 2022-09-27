@@ -2,6 +2,7 @@
 @import './vars.css';
 @import './reset.css';
 @import './range.css';
+@import './input.css';
 
 @import './header.css';
 @import './footer.css';
@@ -9,6 +10,7 @@
 @import './blocks/stock.css';
 @import './blocks/feedback.css';
 @import './blocks/answer.css';
+@import './blocks/dialog.css';
 
 body {
   font-family: 'Gotham Pro', sans-serif;
@@ -20,6 +22,21 @@ body {
   -webkit-font-smoothing: antialiased;
   color: #270205;
   background: #F5F5F5;
+}
+
+.ui-widget {
+  font-family: 'Gotham Pro', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  font-display: swap;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  color: #270205;
+}
+
+body.disable {
+  overflow: hidden;
 }
 
 .block {

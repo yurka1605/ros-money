@@ -1,0 +1,154 @@
+.input-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 14px;
+}
+
+.input {
+  background: #FFFFFF;
+  border: 1px solid #7A7A7A;
+  border-radius: 30px;
+  padding: 0 16px;
+  color: #7A7A7A;
+  width: 100%;
+  height: 44px;
+  transition: all .3s linear;
+  font-family: 'Gotham Pro'!important;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px!important;
+}
+
+.label {
+  padding-bottom: 10px;
+  color: #270205;
+}
+
+.input-field.valid .label {
+  color: #219B4B;
+}
+
+.input-field.invalid .label {
+  color: #E30016;
+}
+
+.input-field.valid .select:after,
+.input-field.valid .select {
+  border-color: #219B4B;
+}
+
+.input-field.valid .select .current {
+  color: #219B4B;
+}
+
+.input-field.invalid .select:after,
+.input-field.invalid .select {
+  border-color: #E30016;
+}
+
+.input-field.invalid .select .current {
+  color: #E30016;
+}
+
+.input-field.valid .input {
+  color: #219B4B;
+  border-color: #219B4B;
+}
+
+.input-field.invalid .input {
+  color: #E30016;
+  border-color: #E30016;
+}
+
+.nice-select {
+  background: #FFFFFF;
+  border-radius: 30px;
+  width: 100%;
+  filter: drop-shadow(0px 3px 11px rgba(39, 2, 5, 0.06));
+  color: #7A7A7A;
+  font-family: 'Gotham Pro'!important;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px!important;
+  border: solid 1px transparent;
+}
+
+.nice-select .option,
+.nice-select .current {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nice-select:active, .nice-select.open, .nice-select:focus {
+  border-color: transparent;
+}
+
+.nice-select {
+  z-index: 1;
+}
+
+.nice-select.open {
+  z-index: 9;
+}
+
+.nice-select.open .list {
+  max-width: 100%;
+}
+
+.input::placeholder {
+  font-family: 'Gotham Pro', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  color: #7A7A7A;
+  font-size: 12px;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-button:hover, .ui-button:focus {
+  border: auto;
+  background: auto;
+  font-weight: normal;
+  color: auto;
+}
+
+.custom-checkbox>input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.custom-checkbox>p {
+  display: inline-flex;
+  user-select: none;
+  font-size: 12px;
+  color: #000000;
+}
+
+.custom-checkbox>p::before {
+  box-sizing: border-box;
+  content: '';
+  position: relative;
+  top: 2px;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #E30016;
+  border-radius: 4px;
+  margin-right: 15px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+.custom-checkbox>input:checked+p::before {
+  background-image: url('../img/checkbox-fill.svg');
+  background-size: contain;
+  border: 0;
+  border-radius: 0;
+}

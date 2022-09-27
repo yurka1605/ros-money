@@ -3,7 +3,49 @@ $(document).ready(function() {
   initSlick();
   initVideos();
   initAccordion();
+  initInputs();
+  initSelects();
 });
+
+function initSelects() {
+  $( ".select" ).each(function() {
+    const $this = $(this);
+    $this.niceSelect();
+    $this.next().on('DOMSubtreeModified', '.current', function() {
+      $this.parent().removeClass('invalid valid');
+      const val = +$(this).next()
+        .children('li.option.selected')
+        .attr('data-value');
+      $this.parent().addClass(val === 0 ? 'invalid' : 'valid');
+    });
+  });
+}
+
+function initInputs() {
+  $('.input').each(function() {
+    const $this = $(this);
+    const $field = $this.parent();
+
+    const mask = $this.attr('data-masked');
+    if (mask) {
+      $this.mask(mask);
+    }
+
+    $this.on('blur', () => {
+      if ($this.attr('required')) {
+        const isValid = !mask || mask.length === $this[0].value?.length;
+        const validateClass = $this[0].validity.valid && isValid ? 'valid' : 'invalid';
+        $field.addClass(validateClass);
+      } else if ($this[0].value.length > 0) {
+        $field.addClass('valid');
+      }
+    });
+  
+    $this.on('focus', () => {
+      $field.removeClass('valid invalid');
+    });
+  });
+}
 
 function initAccordion() {
   $('.accordion').each(function() {

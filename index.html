@@ -7,6 +7,7 @@
   <title>РосДеньги</title>
   <link rel="stylesheet" href="./css/libs/jquery-ui.css">
   <link rel="stylesheet" href="./css/libs/theme.css">
+  <link rel="stylesheet" href="./css/libs/nice-select.css">
   <link rel="stylesheet" href="./css/libs/slick.css">
   <link rel="stylesheet" href="./css/libs/slick-theme.css">
   <link rel="stylesheet" href="./css/reset.css">
@@ -25,7 +26,7 @@
         </button>
       </div>
     </header>
-    <section class="block">
+    <section id="calculator" class="block">
       <div class="main-banner">
         <span>Заём «Лёгкий» под 0,1% в первую неделю!</span>
       </div>
@@ -98,7 +99,7 @@
         </p>
       </div>
     </section>
-    <section class="block">
+    <section id="stocks" class="block">
       <h2>Акции</h2>
       <div class="tap-block">
         <img class="pointer" src="./img/tap.png" alt="tap">
@@ -199,7 +200,7 @@
         </div>
       </div>
     </section>
-    <section class="block">
+    <section id="feedbacks" class="block">
       <h2>Отзывы о нас</h2>
       <div class="tap-block">
         <img class="pointer" src="./img/tap.png" alt="tap">
@@ -284,7 +285,7 @@
         </div>
       </div>
     </section>
-    <section class="block answer">
+    <section id="answer" class="block answer">
       <h2>Ответы <br>на вопросы</h2>
       <p class="block-description">
         Здесь собраны ответы на самые часто задаваемые нам вопросы от наших клиентов
@@ -437,7 +438,7 @@
         </svg>
         <span>Оплатить</span>
       </div>
-      <div class="footer-item">
+      <div class="footer-item footer-item--money">
         <div class="get-money">
           <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5.44953 13.3232V15.0074H11.6616V16.2222H5.44953V19.8113H3.40646V16.2222H0.507516V15.0074H3.40646V0.485024H10.64C13.1248 0.485024 15.0575 1.04641 16.4379 2.16917C17.8368 3.27353 18.5362 4.84725 18.5362 6.89032C18.5362 8.95179 17.8368 10.5439 16.4379 11.6667C15.0575 12.771 13.1248 13.3232 10.64 13.3232H5.44953ZM5.44953 2.252V11.5839H10.6676C12.545 11.5839 13.9807 11.1789 14.9746 10.3691C15.987 9.55919 16.4931 8.40881 16.4931 6.91793C16.4931 5.42704 15.987 4.27666 14.9746 3.4668C13.9807 2.65693 12.545 2.252 10.6676 2.252H5.44953Z" fill="white"/>
@@ -460,6 +461,230 @@
         <span>Чат</span>
       </div>
     </footer>
+    <!-- forms -->
+    <div id="dialog-city" class="dialog">
+      <div class="current-city">
+        <span class="current-city__label">Ваш город:</span>
+        <span class="current-city__value">Санкт-Петербург</span>
+      </div>
+      <div class="city-search-container">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_175_201)">
+          <path d="M9.00001 3.35999C8.43337 3.35999 7.87945 3.52801 7.4083 3.84282C6.93716 4.15764 6.56994 4.60509 6.3531 5.1286C6.13625 5.65211 6.07951 6.22816 6.19006 6.78392C6.30061 7.33967 6.57347 7.85017 6.97415 8.25085C7.37483 8.65152 7.88532 8.92439 8.44108 9.03494C8.99683 9.14548 9.57289 9.08875 10.0964 8.8719C10.6199 8.65506 11.0674 8.28784 11.3822 7.81669C11.697 7.34555 11.865 6.79163 11.865 6.22499C11.865 5.46514 11.5632 4.73642 11.0259 4.19912C10.4886 3.66183 9.75986 3.35999 9.00001 3.35999ZM9.00001 8.08999C8.63115 8.08999 8.27057 7.98061 7.96387 7.77568C7.65717 7.57075 7.41813 7.27947 7.27698 6.93869C7.13582 6.59791 7.09889 6.22292 7.17085 5.86114C7.24281 5.49937 7.42043 5.16706 7.68126 4.90623C7.94208 4.64541 8.27439 4.46778 8.63617 4.39582C8.99794 4.32386 9.37293 4.36079 9.71372 4.50195C10.0545 4.64311 10.3458 4.88215 10.5507 5.18885C10.7556 5.49554 10.865 5.85612 10.865 6.22499C10.8637 6.71875 10.6666 7.19183 10.317 7.54051C9.96739 7.88918 9.49377 8.08499 9.00001 8.08499V8.08999Z" fill="#A5A0A0"/>
+          <path d="M8.99999 1C7.44258 1.0013 5.94898 1.61884 4.84539 2.71775C3.7418 3.81665 3.11791 5.30762 3.10999 6.865C3.10999 9.2 4.41999 11.155 5.37999 12.58L5.55499 12.84C6.51012 14.2243 7.53477 15.5594 8.62499 16.84L9.00499 17.285L9.38499 16.84C10.4751 15.5592 11.4997 14.2242 12.455 12.84L12.63 12.575C13.585 11.15 14.895 9.2 14.895 6.865C14.8871 5.30675 14.2625 3.81503 13.1578 2.71599C12.0531 1.61694 10.5583 0.99998 8.99999 1ZM11.795 12L11.615 12.265C10.755 13.555 9.61499 15 8.99999 15.715C8.40999 15 7.24499 13.555 6.38499 12.265L6.20999 12C5.32499 10.68 4.10999 8.875 4.10999 6.845C4.10999 6.20284 4.23647 5.56696 4.48221 4.97368C4.72796 4.3804 5.08815 3.84133 5.54223 3.38725C5.99631 2.93317 6.53538 2.57297 7.12866 2.32723C7.72195 2.08148 8.35782 1.955 8.99999 1.955C9.64215 1.955 10.278 2.08148 10.8713 2.32723C11.4646 2.57297 12.0037 2.93317 12.4577 3.38725C12.9118 3.84133 13.272 4.3804 13.5178 4.97368C13.7635 5.56696 13.89 6.20284 13.89 6.845C13.89 8.895 12.68 10.7 11.795 12Z" fill="#A5A0A0"/>
+          </g>
+          <defs>
+          <clipPath id="clip0_175_201">
+          <rect width="18" height="18" fill="white"/>
+          </clipPath>
+          </defs>
+        </svg>
+        <input
+          class="input input--city-search"
+          type="text"
+          placeholder="Введите название Вашего города">
+      </div>
+      <div class="city-title">Выберете свой город</div>
+      <ul class="city-list">
+        <li class="city-item">Барнаул</li>
+        <li class="city-item city-item--big city-item--selected">Санкт-Петербург</li>
+        <li class="city-item city-item--big">Екатеринбург</li>
+        <li class="city-item">Саратов</li>
+        <li class="city-item">Иркутск</li>
+        <li class="city-item">Сочи</li>
+        <li class="city-item">Казань</li>
+        <li class="city-item">Ставрополь</li>
+        <li class="city-item">Краснодар</li>
+        <li class="city-item">Тюмень</li>
+        <li class="city-item city-item--big">Москва</li>
+        <li class="city-item city-item--big">Хабаровск</li>
+        <li class="city-item">Новосибирск</li>
+        <li class="city-item">Чита</li>
+        <li class="city-item">Самара</li>
+        <li class="city-item">Якутск</li>
+      </ul>
+    </div>
+
+    <div id="dialog-menu" class="dialog">
+      <ul class="menu-list">
+        <li class="menu-item">
+          <a href="#calculator">Как получить заём</a>
+        </li>
+        <li class="menu-item">
+          <a href="#stocks">Акции</a>
+        </li>
+        <li class="menu-item">
+          <a href="#feedbacks">Отзывы</a>
+        </li>
+        <li class="menu-item">
+          <a href="#answer">Ответы на вопросы</a>
+        </li>
+        <li class="menu-item">
+          <a href="#">Вакансии</li>
+        <li class="menu-item">
+          <a href="#">Карта отделений</a>
+        </li>
+      </ul>
+      <div class="menu-location">
+        <svg width="15" height="8" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_52_265)">
+          <path d="M0.258855 10.7997C0.428139 10.9281 0.655333 11 0.891913 11C1.12853 11 1.35572 10.9281 1.52497 10.7997L11 3.62411L20.4731 10.7997C20.6424 10.9281 20.8696 11 21.1062 11C21.3428 11 21.57 10.9281 21.7392 10.7997C21.8218 10.7372 21.8874 10.6626 21.9321 10.5801C21.9769 10.4977 22 10.4091 22 10.3196C22 10.2301 21.9769 10.1415 21.9321 10.0591C21.8874 9.97665 21.8218 9.90201 21.7392 9.83958L11.6615 2.20901C11.4845 2.075 11.2471 2 11 2C10.7528 2 10.5155 2.075 10.3385 2.20901L0.260769 9.83958C0.178239 9.90201 0.11264 9.97665 0.0678368 10.0591C0.0230697 10.1415 9.1808e-09 10.2301 8.11351e-09 10.3196C7.04623e-09 10.4091 0.0230697 10.4977 0.0678368 10.5801C0.11264 10.6626 0.178239 10.7372 0.260769 10.7997L0.258855 10.7997Z" fill="#7A7A7A"/>
+          </g>
+          <defs>
+          <clipPath id="clip0_52_265">
+          <rect width="15" height="22" fill="white" transform="translate(0 15) rotate(-90)"/>
+          </clipPath>
+          </defs>
+        </svg>
+        <div class="menu-location__info">
+          <div class="menu-location__value">Санкт-Петербург</div>
+          <div class="menu-location__label">Ваш город</div>
+        </div>
+      </div>
+      <div class="menu-contact menu-contact--phone">
+        <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16.9461 20.6578C16.7406 20.6572 16.5357 20.6347 16.335 20.5906C12.5135 19.8 8.99287 17.9465 6.17833 15.2433C3.42385 12.5342 1.51347 9.08493 0.678333 5.31279C0.579859 4.84267 0.604029 4.35512 0.748516 3.89704C0.893003 3.43896 1.15294 3.02578 1.50333 2.69724L3.94778 0.344461C4.07263 0.226386 4.22098 0.135968 4.38314 0.0791053C4.54531 0.0222431 4.71764 0.000215624 4.88889 0.0144606C5.06646 0.0329852 5.23781 0.0901854 5.3909 0.182039C5.54399 0.273892 5.67509 0.398168 5.775 0.546127L8.83055 5.06224C8.94514 5.23747 9.00045 5.44485 8.98835 5.65388C8.97625 5.8629 8.89738 6.06251 8.76333 6.22335L7.22944 8.05668C7.84034 9.40874 8.70549 10.6307 9.77778 11.6561C10.8431 12.7187 12.1023 13.5672 13.4872 14.1556L15.3878 12.6461C15.5474 12.52 15.7416 12.4454 15.9447 12.4323C16.1477 12.4192 16.3499 12.4682 16.5244 12.5728L21.1383 15.555C21.2967 15.6496 21.4316 15.7787 21.5329 15.9328C21.6342 16.0868 21.6994 16.2618 21.7235 16.4447C21.7476 16.6275 21.73 16.8134 21.6721 16.9885C21.6141 17.1635 21.5173 17.3232 21.3889 17.4556L19.0056 19.8145C18.7348 20.0839 18.4135 20.2971 18.0601 20.4418C17.7066 20.5865 17.328 20.6599 16.9461 20.6578ZM4.79111 1.22446L2.34667 3.57724C2.14955 3.76091 2.00364 3.99272 1.92328 4.24988C1.84292 4.50704 1.83087 4.78068 1.88833 5.04391C2.66488 8.58354 4.44994 11.8225 7.02778 14.3695C9.67645 16.9126 12.9895 18.656 16.5856 19.3989C16.8577 19.4558 17.1398 19.4443 17.4064 19.3654C17.6731 19.2864 17.916 19.1426 18.1133 18.9467L20.4967 16.5878L16.0417 13.7095L14.0006 15.335C13.9224 15.3969 13.8303 15.4387 13.7323 15.4568C13.6343 15.4749 13.5334 15.4687 13.4383 15.4389C11.7435 14.8145 10.2077 13.8232 8.94056 12.5361C7.62994 11.3122 6.6126 9.80813 5.96444 8.13613C5.93702 8.03491 5.93611 7.92833 5.9618 7.82665C5.98749 7.72498 6.0389 7.63162 6.11111 7.55557L7.76111 5.58168L4.79111 1.22446Z" fill="#E30016"/>
+        </svg>
+        <div class="phone-info">
+          <a href="tel:+88002005051" class="phone-number">8 800 200 50 51</a>
+          <p>Круглосуточно</p>
+        </div>
+      </div>
+      <div class="menu-contact menu-contact--email">
+        <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18.15 0.199951C19.012 0.199951 19.8386 0.542361 20.4481 1.15185C21.0576 1.76135 21.4 2.588 21.4 3.44995V13.85C21.4 14.7119 21.0576 15.5386 20.4481 16.148C19.8386 16.7575 19.012 17.1 18.15 17.1H3.85001C2.98805 17.1 2.1614 16.7575 1.55191 16.148C0.942416 15.5386 0.600006 14.7119 0.600006 13.85V3.44995C0.600006 2.588 0.942416 1.76135 1.55191 1.15185C2.1614 0.542361 2.98805 0.199951 3.85001 0.199951H18.15ZM20.1 5.34925L11.3302 10.5103C11.2473 10.5589 11.1546 10.5886 11.0589 10.5972C10.9631 10.6057 10.8666 10.5929 10.7764 10.5597L10.6698 10.5103L1.90001 5.35185V13.85C1.90001 14.3671 2.10545 14.8631 2.47115 15.2288C2.83684 15.5945 3.33283 15.8 3.85001 15.8H18.15C18.6672 15.8 19.1632 15.5945 19.5289 15.2288C19.8946 14.8631 20.1 14.3671 20.1 13.85V5.34925ZM18.15 1.49995H3.85001C3.33283 1.49995 2.83684 1.7054 2.47115 2.07109C2.10545 2.43679 1.90001 2.93278 1.90001 3.44995V3.84255L11 9.19595L20.1 3.83995V3.44995C20.1 2.93278 19.8946 2.43679 19.5289 2.07109C19.1632 1.7054 18.6672 1.49995 18.15 1.49995Z" fill="#E30016"/>
+        </svg>
+        <a href="mailto:expert@ros-dengi.ru">expert@ros-dengi.ru</a>
+      </div>
+      <div class="social-links">
+        <a class="social-link--vk" href="#">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_152_329)">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.6333 3.96537C15.744 3.60137 15.6333 3.33337 15.1033 3.33337H13.3533C12.908 3.33337 12.7027 3.56471 12.5913 3.82004C12.5913 3.82004 11.7013 5.95071 10.4407 7.33471C10.0327 7.73604 9.84733 7.86337 9.62467 7.86337C9.51333 7.86337 9.346 7.73604 9.346 7.37137V3.96537C9.346 3.52804 9.22333 3.33337 8.85267 3.33337H6.10067C5.82267 3.33337 5.65533 3.53604 5.65533 3.72871C5.65533 4.14271 6.286 4.23871 6.35067 5.40404V7.93604C6.35067 8.49137 6.24867 8.59204 6.026 8.59204C5.43267 8.59204 3.98933 6.45137 3.13267 4.00204C2.96667 3.52537 2.79867 3.33337 2.35133 3.33337H0.6C0.1 3.33337 0 3.56471 0 3.82004C0 4.27471 0.593333 6.53337 2.76333 9.52071C4.21 11.5607 6.24667 12.6667 8.102 12.6667C9.21467 12.6667 9.352 12.4214 9.352 11.998V10.456C9.352 9.96471 9.45733 9.86671 9.81 9.86671C10.07 9.86671 10.5147 9.99471 11.5533 10.978C12.74 12.144 12.9353 12.6667 13.6033 12.6667H15.3533C15.8533 12.6667 16.104 12.4214 15.96 11.936C15.8013 11.4534 15.2347 10.7527 14.4833 9.92137C14.0753 9.44804 13.4633 8.93804 13.2773 8.68271C13.018 8.35537 13.092 8.20937 13.2773 7.91804C13.2773 7.91804 15.4107 4.96737 15.6327 3.96537H15.6333Z" fill="white"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_152_329">
+            <rect width="16" height="16" fill="white"/>
+            </clipPath>
+            </defs>
+          </svg>
+        </a>
+        <a class="social-link--telegram" href="#">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.8067 2.43638C13.8067 2.43638 15.1017 1.93138 14.9933 3.15771C14.9577 3.66271 14.634 5.43038 14.382 7.34205L13.5187 13.0054C13.5187 13.0054 13.4467 13.835 12.799 13.9794C12.1517 14.1234 11.1803 13.4744 11.0003 13.33C10.8563 13.2217 8.30234 11.5984 7.403 10.805C7.151 10.5884 6.863 10.1557 7.439 9.65071L11.216 6.04338C11.6477 5.61071 12.0793 4.60071 10.2807 5.82705L5.244 9.25371C5.244 9.25371 4.66834 9.61471 3.58934 9.29005L1.25067 8.56838C1.25067 8.56838 0.387337 8.02738 1.86234 7.48638C5.46 5.79105 9.885 4.05971 13.806 2.43638H13.8067Z" fill="white"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div id="dialog-money" class="dialog">
+      <h2>Онлайн-заявка</h2>
+      <form class="money-form">
+        <div class="money-form__fields">
+          <div class="input-field">
+            <label class="label" for="lastname">Фамилия</label>
+            <input
+              placeholder="Иванов"
+              name="lastname"
+              type="text"
+              class="input">
+          </div>
+          <div class="input-field">
+            <label class="label" for="name">Имя*</label>
+            <input
+              required
+              placeholder="Иван"
+              name="name"
+              type="text"
+              class="input">
+          </div>
+          <div class="input-field">
+            <label class="label" for="secondName">Отчество</label>
+            <input
+              placeholder="Иванович"
+              name="secondName"
+              type="text"
+              class="input">
+          </div>
+          <div class="input-field">
+            <label class="label" for="birthday">Дата рождения*</label>
+            <input
+              required
+              data-masked="00.00.0000"
+              placeholder="ДД.ММ.ГГГГ"
+              name="birthday"
+              type="text"
+              class="input">
+          </div>
+          <div class="input-field">
+            <label class="label" for="phoneNumber">Телефон*</label>
+            <input
+              required
+              data-masked="+7 (999) 999-99-99"
+              placeholder="+7 (999) 999-99-99"
+              name="phoneNumber"
+              type="text"
+              class="input">
+          </div>
+          <div class="input-field">
+            <label class="label" for="phoneNumber">Город*</label>
+            <select class="select city-select" name="city" required>
+              <option value='0'>Выбрать город</option>
+              <option value="Saint-Petersburg">Санкт-Петербург</option>
+              <option value="Moscow">Москва</option>
+              <option value="Kazan">Казань</option>
+            </select>
+          </div>
+        </div>
+        <div class="select-address-wrapper input-field">
+          <select class="select select-address" name="address" required>
+            <option value='0'>Выбрать адрес</option>
+            <option value="universiteit-3">Санкт-Петербург, Университетская наб., 3</option>
+            <option value="makarova-16-2">Санкт-Петербург, наб. Макарова, 16/2</option>
+            <option value="vasilii-11">Санкт-Петербург, 6-я линия Васильевского острова, 11</option>
+          </select>
+        </div>
+        <div class="input-field">
+          <label class="custom-checkbox accept-checkbox">
+            <input type="checkbox" name="accept" value="accept" required>
+            <p>Я даю компании «РосДеньги» своё согласие
+              на обработку моих персональных данных
+              в соответствии с законодательством Российской Федерации 
+              и Политикой использования персональных данных.</p>
+          </label>
+        </div>
+        <div class="calc-submit-banner">
+          <ul class="calc-params">
+            <li class="calc-param">
+              <div class="calc-param__label">Сумма займа</div>
+              <div class="calc-param__value">25 000 ₽</div>
+            </li>
+            <li class="calc-param">
+              <div class="calc-param__label">К возврату</div>
+              <div class="calc-param__value">27 250 ₽</div>
+            </li>
+            <li class="calc-param">
+              <p>при ставке 1% в день</p>
+            </li>
+          </ul>
+          <div class="calc-date__btn">
+            <div class="calc-date">
+              <div class="calc-param__label">Дата возврата</div>
+              <div class="calc-param__value">20.06.2022</div>
+            </div>
+            <button>Получить деньги</button>
+          </div>
+          <div class="calc-change">
+            <div class="calc-change__icon">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.48059 11.7996H13.5194V12.6595H1.48059V11.7996ZM11.5416 4.49029C11.8855 4.14632 11.8855 3.63038 11.5416 3.28641L9.99374 1.73856C9.64977 1.3946 9.13382 1.3946 8.78986 1.73856L2.3405 8.18792V10.9396H5.09223L11.5416 4.49029ZM9.3918 2.3405L10.9396 3.88835L9.64977 5.17822L8.10193 3.63038L9.3918 2.3405ZM3.20042 10.0797V8.53188L7.49999 4.23231L9.04783 5.78016L4.74826 10.0797H3.20042Z" fill="#E30016"/>
+              </svg>
+            </div>
+            <p>Изменить сумму и дату</p>
+          </div>
+        </div>
+      </form>
+    </div>
   </main>
   <script src="./js/libs/moment-with-locales.min.js"></script>
   <script
@@ -473,7 +698,10 @@
     crossorigin="anonymous"
   ></script>
   <script src="./js/libs/jquery.ui.touch-punch.min.js"></script>
+  <script src="./js/libs/jquery.nice-select.js"></script>
   <script src="./js/libs/slick.js"></script>
+  <script src="./js/libs/jquery.mask.js"></script>
+  <script src="./js/dialog.js"></script>
   <script src="./js/index.js"></script>
 </body>
 </html>

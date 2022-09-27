@@ -11,7 +11,7 @@
   box-shadow: 0px -3px 7px rgba(39, 2, 5, 0.03);
   padding: 10px 0 20px 0;
   user-select: none;
-  z-index: 3;
+  z-index: 1022;
 }
 
 .footer-item {
@@ -35,11 +35,11 @@
   padding-top: 15px;
 }
 
-.footer-item--menu-active {
+.footer-item--active {
   color: #E30016;
 }
 
-.footer-item--menu-active path {
+.footer-item--active:not(.footer-item--money) path {
   fill: #E30016;
 }
 
@@ -63,4 +63,103 @@
   width: 21px;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.calc-submit-banner {
+  width: 100%;
+  padding: 18px 20px;
+  background: linear-gradient(180deg, #F92539 0%, #BF2030 100%);
+  border-radius: 5px;
+  color: #FFFFFF;
+}
+
+.calc-params {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calc-param {
+  position: relative;
+  padding: 0 19px;
+}
+
+.calc-param:first-child {
+  padding-left: 0;
+}
+
+.calc-param:last-child {
+  padding-right: 0;
+}
+
+.calc-param__label {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 13px;
+  white-space: nowrap;
+}
+
+.calc-param__value {
+  padding-top: 6px;
+  font-size: 16px;
+  line-height: 14px;
+  white-space: nowrap;
+}
+
+.calc-param:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: block;
+  width: 1px;
+  height: 26px;
+  background: #FC6E7B;
+}
+
+.calc-param p {
+  font-weight: 300;
+  font-size: 12px;
+}
+
+.calc-date__btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 0 12px;
+}
+
+.calc-date {
+  padding-right: 28px;
+}
+
+.calc-date__btn button {
+  background: #FFFFFF;
+  border-radius: 5.43056px;
+  height: 42px;
+  width: 100%;
+  font-size: 16px;
+  color: #E30016;
+}
+
+.calc-change {
+  display: flex;
+  align-items: center;
+}
+
+.calc-change__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  background: #FFFFFF;
+  margin-right: 9px;
+}
+
+.calc-change p {
+  font-weight: 400;
+  font-size: 12px;
 }
