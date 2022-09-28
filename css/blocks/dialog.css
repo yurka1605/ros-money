@@ -1,7 +1,6 @@
 .dialog h2 {
   font-family: 'Gotham Pro';
   font-style: normal;
-  font-weight: 400;
   font-size: 25px;
   line-height: 24px;
   color: #000000;
@@ -231,6 +230,7 @@
   background: #0088CC;
 }
 
+.ui-dialog[aria-describedby="dialog-pay"],
 .ui-dialog[aria-describedby="dialog-money"] {
   top: 0!important;
   border-radius: 0!important;
@@ -239,16 +239,19 @@
   padding: var(--header-height) 0px var(--footer-height);
   background: #F9F9F9;
 }
+.ui-dialog[aria-describedby="dialog-pay"] .ui-dialog-titlebar,
 .ui-dialog[aria-describedby="dialog-money"] .ui-dialog-titlebar {
   position: initial;
   padding: 0;
   height: 28px;
   background: #F9F9F9;
 }
+.ui-dialog[aria-describedby="dialog-pay"] .ui-dialog-titlebar-close,
 .ui-dialog[aria-describedby="dialog-money"] .ui-dialog-titlebar-close {
   top: 70px;
   right: 15px;
 }
+.ui-dialog[aria-describedby="dialog-pay"] .ui-widget-content,
 .ui-dialog[aria-describedby="dialog-money"] .ui-widget-content {
   padding: 0 16px;
   min-height: calc(100vh - var(--header-height) - var(--footer-height) - 28px)!important;
@@ -268,4 +271,53 @@
 
 .accept-checkbox {
   padding: 20px 0;
+}
+
+.pay-form .input-field {
+  padding-bottom: 28px;
+}
+
+.recaptcha-description {
+  font-size: 12px;
+  text-align: center;
+  color: #000000;
+  padding-bottom: 20px;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.g-recaptcha > div {
+  margin: 0 auto;
+}
+
+.ui-dialog[aria-describedby="dialog-done"] {
+  padding: 0!important;
+  padding-bottom: 30px!important;
+}
+
+.ui-dialog[aria-describedby="dialog-done"] .ui-widget-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0!important;
+}
+
+.dialog-done__img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #65C987;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 21px;
+  border-radius: 50%;
+}
+
+.ui-dialog[aria-describedby="dialog-done"] p {
+  max-width: 200px;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+
+  color: #000000;
 }

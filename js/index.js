@@ -9,13 +9,15 @@ $(document).ready(function() {
   $('.menu-item a').each(function() {
     $(this).on('click', function(e) {
       e.preventDefault();
-      $("html, body").animate({
-        scrollTop: $($(this).attr('href')).offset().top + "px"
-      }, {
-          duration: 500,
-          easing: "swing"
-      });
-      return false;
+      const link = $(this).attr('href');
+      if (link && link !== '#') {
+        $("html, body").animate({
+          scrollTop: $($(this).attr('href')).offset().top + "px"
+        }, {
+            duration: 500,
+            easing: "swing"
+        });
+      }
     });
   });
 });
