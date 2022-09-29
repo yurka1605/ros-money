@@ -37,9 +37,10 @@ function initSelects() {
 }
 
 function initInputs() {
-  $('.input').each(function() {
+  $('.input, input[type=checkbox]').each(function() {
     const $this = $(this);
-    const $field = $this.parent();
+    const isCheckbox = $this.attr('type') === 'checkbox';
+    let $field = $this.parent();
 
     const mask = $this.attr('data-masked');
     if (mask) {
@@ -59,6 +60,13 @@ function initInputs() {
     $this.on('focus', () => {
       $field.removeClass('valid invalid');
     });
+
+    if (isCheckbox) {
+      $this.change(e => {
+        $field = $this.parent().parent();
+        $field.removeClass('invalid');
+      });
+    }
   });
 }
 

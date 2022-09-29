@@ -7,7 +7,7 @@ $(document).ready(function() {
     closeOnEscape: true,
     modal: true,
     open: () => $('body').addClass('disable'),
-    close: () => $('body').removeClass('disable'),
+    close: removeDisableFormBody,
   };
 
   const city = $( "#dialog-city" ).dialog({
@@ -80,59 +80,130 @@ $(document).ready(function() {
 });
 
 function openDialog(dialog, trigger) {
+  $('body').addClass('disable');
   dialog.dialog( "open" );
   trigger.addClass('footer-item--active');
 }
 
 function closeDialog(menuItemSelector) {
-  $('body').removeClass('disable');
+  removeDisableFormBody();
   $(menuItemSelector).removeClass('footer-item--active');
 }
 
-function submitPay() {
-  const data = {};
-  $('.pay-form').find('input').each(function() {
-    const val = $(this).val();
-    data[this.name] = { val, input: $(this) };
-    if (!val || `${val}`.length !== $(this).attr('data-masked').length) {
-      $(this).parent('invalid');
-      data[this.name].validate = false;
-    } else {
-      data[this.name].validate = true;
+function removeDisableFormBody() {
+  let isSomeDialogDisplay = false;
+  $('body').find('.dialog').each(function() {
+    if ($(this).dialog( "isOpen" )) {
+      isSomeDialogDisplay = true;
     }
   });
 
-  const isValid = Object.values(data).findIndex(item => !item.validate) === -1;
-  if (isValid) {
-    Object.entries(data).forEach(([key, value]) => {
-      value.input.parent().removeClass('valid invalid');
-      value.input.val('');
-      data[key] = value.val;
-    });
-    checkDebt(data);
-    pay.dialog('close');
-    done.dialog('open');
-  } else {
-    grecaptcha.reset();
+  if (!isSomeDialogDisplay) {
+    $('body').removeClass('disable');
   }
 }
 
+function submitPay() {
+  const data = getInputValues('.pay-form');
+  if (checkValidForm(data)) {
+    checkDebt(getFormFieldOnly(data));
+    resetForm(data);
+    done.dialog('open');
+  }
+
+  grecaptcha.reset();
+}
+
 function submitMoney(e) {
+  e.preventDefault();
+  const data = {
+    ...getInputValues('.money-form'),
+    ...getSelectValues('.money-form'),
+  };
+
+  if (checkValidForm(data)) {
+    const formData = getFormFieldOnly(data);
+    getMoney(formData);
+    resetForm(data);
+    done.dialog('open');
+  }
+}
+
+function getInputValues(formSelector) {
   const data = {};
-  $('.money-form').find('input, select').each(function() {
-    const val = $(this).val();
-    data[this.name] = { val };
-    if (!val || `${val}`.length !== $(this).attr('data-masked').length) {
-      $(this).parent('invalid');
-      data[this.name].validate = false;
-    } else {
-      data[this.name].validate = true;
+  $(formSelector).find('input').each(function() {
+    const $this = $(this);
+    const isCheckbox = $this.attr('type') === 'checkbox';
+    const val = isCheckbox ? $this.is(":checked") : $this.val();
+    const required = $this.attr('required');
+    data[this.name] = { 
+      val,
+      valid: null,
+      node: $this,
+    };
+
+    if (required) {
+      const mask = $this.attr('data-masked');
+      const isInvalid = !val || (mask && `${val}`.length !== mask.length);
+      const $fieldWrap = isCheckbox ? $this.parent().parent() : $this.parent(); 
+      $fieldWrap.addClass(isInvalid ? 'invalid' : 'valid');
+      data[this.name].valid = !isInvalid;
     }
   });
 
-  console.log(data);
+  return data;
 }
 
+function getSelectValues(formSelector) {
+  const data = {};
+  $(formSelector).find('.select.nice-select').each(function() {
+    const $this = $(this);
+    const val = $this.children('.list')
+                         .children('.option.selected')
+                         .attr('data-value');
+    const name = $this.prev().attr('name');
+    const required = $this.prev().attr('required');
+    data[name] = { 
+      val,
+      valid: null,
+      node: $this,
+    };
+
+    if (required) {
+      $this.parent().addClass(val === '0' ? 'invalid' : 'valid');
+      data[name].valid = val !== '0';
+    }
+  });
+
+  return data;
+}
+
+function checkValidForm(formData) {
+  return Object.values(formData).findIndex(
+    item => !item.valid && item.valid !== null
+  ) === -1;
+}
+
+function getFormFieldOnly(formData) {
+  const data = {};
+  Object.entries(formData)
+        .forEach(([key, { val }]) => data[key] = val);
+  return data;
+}
+
+function resetForm(formData) {
+  Object.entries(formData).forEach(([key, { node }]) => {
+    node.parent().removeClass('valid invalid');
+    node.val('');
+  });
+}
+
+// form submit data
+
 function checkDebt(formData) {
+  console.log(formData);
+}
+
+function getMoney(formData) {
   console.log(formData);
 }

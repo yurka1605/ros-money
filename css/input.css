@@ -78,6 +78,11 @@
   width: 100%;
 }
 
+.input-field--checkbox .error {
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
 .error img {
   display: block;
   width: 34px;
