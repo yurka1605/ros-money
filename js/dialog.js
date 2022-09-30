@@ -6,7 +6,6 @@ $(document).ready(function() {
     draggable: false,
     closeOnEscape: true,
     modal: true,
-    open: () => $('body').addClass('disable'),
     close: removeDisableFormBody,
   };
 
@@ -80,27 +79,26 @@ $(document).ready(function() {
 });
 
 function openDialog(dialog, trigger) {
-  $('body').addClass('disable');
   dialog.dialog( "open" );
   trigger.addClass('footer-item--active');
 }
 
 function closeDialog(menuItemSelector) {
-  removeDisableFormBody();
+  // removeDisableFormBody();
   $(menuItemSelector).removeClass('footer-item--active');
 }
 
 function removeDisableFormBody() {
-  let isSomeDialogDisplay = false;
-  $('body').find('.dialog').each(function() {
-    if ($(this).dialog( "isOpen" )) {
-      isSomeDialogDisplay = true;
-    }
-  });
+  // let isSomeDialogDisplay = false;
+  // $('body').find('.dialog').each(function() {
+  //   if ($(this).dialog( "isOpen" )) {
+  //     isSomeDialogDisplay = true;
+  //   }
+  // });
 
-  if (!isSomeDialogDisplay) {
-    $('body').removeClass('disable');
-  }
+  // if (!isSomeDialogDisplay) {
+  //   $('body').removeClass('disable');
+  // }
 }
 
 function submitPay() {
