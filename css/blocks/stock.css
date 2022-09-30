@@ -47,6 +47,7 @@
   display: grid;
   row-gap: 8px;
   margin-top: 24px;
+  margin-bottom: 3px;
 }
 
 .suggestion-item {

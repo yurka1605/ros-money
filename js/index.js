@@ -1,4 +1,47 @@
 $(document).ready(function() {
+  let start;
+
+  $(window)
+    .on('touchstart', function(e) {
+      start = {
+        y: e.originalEvent.touches[0].pageY,
+        x: e.originalEvent.touches[0].pageX,
+      }
+    });
+  $(window).on('touchend', function(e) {
+      const touchLengthY = start.y - e.originalEvent.changedTouches[0].pageY;
+      const touchLengthX = start.x - e.originalEvent.changedTouches[0].pageX;
+      if (Math.abs(touchLengthY) < 10 || Math.abs(touchLengthX) > 50) {
+        return;
+      }
+
+      const $block = getCurrentBlock();
+      const blockPos = {
+        top: Math.floor($block.offset().top),
+        bottom: Math.floor($block.offset().top + $block.outerHeight()),
+      };
+      const scrollPos = {
+        top: Math.floor($(window).scrollTop()),
+        bottom: Math.floor($(window).scrollTop() + $(window).outerHeight()),
+      };
+
+      let scrollTop;
+      if (touchLengthY > 0) {
+        scrollTop = blockPos.bottom > scrollPos.bottom ? 
+          scrollPos.top + Math.abs(blockPos.bottom - scrollPos.bottom) : 
+          $($block.next()).offset().top;
+      } else {
+        scrollTop = blockPos.top < scrollPos.top ?
+          blockPos.top :
+          $($block.prev()).offset().top;
+      }
+  
+      $("html, body").animate({scrollTop: scrollTop + "px"}, {
+        duration: 500,
+        easing: "swing",
+      });
+    });
+
   initRangeSliders();
   initSlick();
   initVideos();
@@ -21,6 +64,23 @@ $(document).ready(function() {
     });
   });
 });
+
+function getCurrentBlock() {
+  let $block;
+  $('.block').each(function () {
+    const $this = $(this);
+    const top = $this.offset().top;
+    const middleBlock = top + $this.outerHeight() / 2;
+    const scrollPosTop = $(window).scrollTop();
+    const scrollPosBottom = $(window).scrollTop() + $(window).height();
+    const isCurrentBlock = middleBlock > scrollPosTop && middleBlock < scrollPosBottom;
+    if (isCurrentBlock) {
+      $block = $this;
+    }
+  });
+
+  return $block;
+}
 
 function initSelects() {
   $( ".select" ).each(function() {

@@ -18,7 +18,8 @@
   column-gap: 20px;
 }
 
-.header-btns button {
+.header-btns > button,
+.header-btns > a {
   display: flex;
   align-items: center;
   justify-content: center;
