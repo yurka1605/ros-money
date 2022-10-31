@@ -2,10 +2,7 @@ $(document).ready(function() {
   let start, disabled;
 
   $("html, body").on('touchstart', function(e) {
-    if (disabled) {
-      return;
-    }
-
+    e.preventDefault();
     start = {
       y: e.originalEvent.touches[0].pageY,
       x: e.originalEvent.touches[0].pageX,
