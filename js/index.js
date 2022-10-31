@@ -1,11 +1,10 @@
+let start, disabled;
 $(document).ready(function() {
-  let start, disabled;
-
-  $("html, body").on('touchstart', function(e) {
-    e.preventDefault();
-    start = {
-      y: e.originalEvent.touches[0].pageY,
-      x: e.originalEvent.touches[0].pageX,
+  $("html, body").on('touchstart', touchStart);
+  $("html, body").on('touchmove', function(e) {
+    if (e.cancelable) {
+      e.preventDefault();
+      e.stopPropagation();
     }
   });
 
@@ -77,13 +76,24 @@ $(document).ready(function() {
 
   $('.header img').on('click', () => {
     $("html, body").animate({
-      scrollTop: $('#').offset().top + "px"
+      scrollTop: $('#calculator').offset().top + "px"
     }, {
-        duration: 500,
-        easing: "swing"
+      duration: 500,
+      easing: "swing"
     });
   });
 });
+
+function touchStart(e) {
+  if (e.cancelable) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  start = {
+    y: e.originalEvent.touches[0].pageY,
+    x: e.originalEvent.touches[0].pageX,
+  }
+}
 
 function getCurrentBlock() {
   let $block;
