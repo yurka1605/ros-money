@@ -37,7 +37,7 @@ $(document).ready(function() {
       }
   
       $("html, body").animate({scrollTop: scrollTop + "px"}, {
-        duration: 500,
+        duration: 100,
         easing: "swing",
         complete: function() {
           setActiveMenuItem('#' + getCurrentBlock().attr('id'));
