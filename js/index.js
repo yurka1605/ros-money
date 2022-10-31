@@ -1,7 +1,7 @@
 $(document).ready(function() {
   let start, disabled;
 
-  $(window).on('touchstart', function(e) {
+  $("html, body").on('touchstart', function(e) {
     if (disabled) {
       return;
     }
@@ -11,7 +11,7 @@ $(document).ready(function() {
     }
   });
 
-  $(window).on('touchend', function(e) {
+  $("html, body").on('touchend', function(e) {
     if (disabled) {
       return;
     }
