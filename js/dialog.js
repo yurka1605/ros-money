@@ -11,13 +11,20 @@ $(document).ready(function() {
 
   const city = $( "#dialog-city" ).dialog({
     ...dialogConfig,
+    position: { my: "center" },
     width: $(window).width() - 32,
   });
 
-  $( ".coordinates-btn, .menu-location" ).on(
-    "click", 
-    () => city.dialog("open")
-  );
+  $( ".coordinates-btn, .menu-location" ).on("click", function()  {
+    city.dialog("open");
+    setTimeout(() => {
+      console.log(city.dialog());
+      $('.ui-widget-overlay').on('click', function() {
+        const zIndex = $(this).css('z-index');
+        console.log(zIndex);
+      });
+    }, 0);
+  });
 
   const menu = $('#dialog-menu').dialog({
     ...dialogConfig,

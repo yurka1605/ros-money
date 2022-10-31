@@ -156,6 +156,10 @@
   font-size: 16px;
 }
 
+.menu-item--active a {
+  color: #E30016!important;
+}
+
 .menu-location {
   display: flex;
   align-items: center;
@@ -222,7 +226,7 @@
   width: 32px;
   height: 32px;
   margin-right: 15px;
-  background: #BCB1B1;
+  background: #0077ff;
   border-radius: 5px;
 }
 

@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  height: 106px;
+  height: 80px;
   padding-left: 14px;
   background: linear-gradient(180deg, #F92539 0%, #BF2030 100%);
   color: #FFFFFF;
@@ -16,6 +16,8 @@
 .main-banner span {
   font-size: 20px;
   line-height: 19px;
+  font-family: 'Gotham Pro';
+  font-weight: 500;
   color: #F2F2F2;
   max-width: calc(100% - 100px);
   z-index: 1;
@@ -26,7 +28,7 @@
   position: absolute;
   right: -32px;
   width: 224px;
-  height: 106px;
+  height: 80px;
   background-image: url('../../img/bg-main.png');
   z-index: 0;
 }
@@ -46,7 +48,7 @@
 .calc {
   height: auto;
   background: #FFFFFF;
-  box-shadow: 0px 7.1px 17.3556px 1.57778px rgba(8, 34, 94, 0.09);
+  /* box-shadow: 0px 7.1px 17.3556px 1.57778px rgba(8, 34, 94, 0.09); */
   border-radius: 12px;
   padding: 25px 20px 20px;
   overflow-y: auto;
@@ -88,15 +90,16 @@
 .notification {
   display: flex;
   align-items: center;
-  padding: 18px 30px;
-  margin: 20px 0;
+  padding: 10px 20px;
+  margin: 12px 0;
   background: #FFFFFF;
   border: 1px solid #D0E1F4;
   box-shadow: 0px 3px 6px -1px rgba(39, 2, 5, 0.02);
   border-radius: 4px;
+  font-family: 'Gotham Pro';
   font-weight: 300;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 12px;
+  line-height: 16px;
   color: #270205;
 }
 
@@ -111,7 +114,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 28px 0;
+  padding: 16px 0;
 }
 
 .calc-summary__item {
@@ -150,7 +153,8 @@
   margin: 0 auto;
   background: #E30016;
   border-radius: 5.43056px;
-  font-weight: 300;
+  font-family: 'Gotham Pro';
+  font-weight: 400;
   font-size: 18px;
   color: #FFFFFF;
 }
@@ -161,4 +165,22 @@
   line-height: 13px;
   text-align: center;
   color: #AC9F9F;
+}
+
+@media (min-height: 810px) {
+  .main-banner::after,
+  .main-banner {
+    height: 106px;
+  }
+
+  .notification {
+    padding: 18px 30px;
+    margin: 20px 0;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .calc-summary {
+    padding: 28px 0;
+  }
 }

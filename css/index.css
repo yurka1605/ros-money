@@ -155,6 +155,9 @@ textarea {
   font-size: 14px;
   line-height: 16px;
   color: #000000;
+}
+
+.ui-accordion .ui-accordion-content.ui-accordion-content-active {
   height: fit-content!important;
 }
 

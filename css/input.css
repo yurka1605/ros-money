@@ -83,10 +83,10 @@
   margin-bottom: 20px;
 }
 
-.error img {
+.error svg {
   display: block;
-  width: 34px;
-  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
 }
 
 .error p {
@@ -139,6 +139,15 @@
   font-weight: 400;
   color: #7A7A7A;
   font-size: 12px;
+  text-align: center; 
+}
+
+::-webkit-input-placeholder {
+  text-align: center;
+}
+  
+:-ms-input-placeholder {
+  text-align: center; 
 }
 
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-button:hover, .ui-button:focus {
