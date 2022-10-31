@@ -1,7 +1,10 @@
 $(document).ready(function() {
-  let start;
+  let start, disabled;
 
   $(window).on('touchstart', function(e) {
+    if (disabled) {
+      return;
+    }
     start = {
       y: e.originalEvent.touches[0].pageY,
       x: e.originalEvent.touches[0].pageX,
@@ -9,6 +12,9 @@ $(document).ready(function() {
   });
 
   $(window).on('touchend', function(e) {
+    if (disabled) {
+      return;
+    }
       const touchLengthY = start.y - e.originalEvent.changedTouches[0].pageY;
       const touchLengthX = start.x - e.originalEvent.changedTouches[0].pageX;
       if (Math.abs(touchLengthY) < 10 || Math.abs(touchLengthX) > 50) {
@@ -35,12 +41,15 @@ $(document).ready(function() {
           blockPos.top :
           $($block.prev()).offset().top;
       }
+
+      disabled = true;
   
       $("html, body").animate({scrollTop: scrollTop + "px"}, {
-        duration: 100,
-        easing: "swing",
+        duration: 500,
+        easing: "linear",
         complete: function() {
           setActiveMenuItem('#' + getCurrentBlock().attr('id'));
+          disabled = false;
         },
       });
     });
