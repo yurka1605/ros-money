@@ -40,9 +40,11 @@ $(document).ready(function() {
       }
 
       disabled = true;
+
+      const duration = Math.abs($(window).scrollTop() - scrollTop) > 200 ? 300 : 100;
   
       $("html, body").animate({scrollTop: scrollTop + "px"}, {
-        duration: 500,
+        duration,
         easing: "linear",
         complete: function() {
           setActiveMenuItem('#' + getCurrentBlock().attr('id'));
