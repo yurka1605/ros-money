@@ -6,7 +6,6 @@ $(document).ready(function() {
       return;
     }
 
-    alert('touchstart');
     start = {
       y: e.originalEvent.touches[0].pageY,
       x: e.originalEvent.touches[0].pageX,
