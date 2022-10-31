@@ -5,6 +5,8 @@ $(document).ready(function() {
     if (disabled) {
       return;
     }
+
+    alert('touchstart');
     start = {
       y: e.originalEvent.touches[0].pageY,
       x: e.originalEvent.touches[0].pageX,
