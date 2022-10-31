@@ -1,4 +1,4 @@
-let done, pay;
+let done, pay, city, menu, money;
 $(document).ready(function() {
   const dialogConfig = {
     autoOpen: false,
@@ -6,10 +6,10 @@ $(document).ready(function() {
     draggable: false,
     closeOnEscape: true,
     modal: true,
-    close: removeDisableFormBody,
+    close: () => {},
   };
 
-  const city = $( "#dialog-city" ).dialog({
+  city = $( "#dialog-city" ).dialog({
     ...dialogConfig,
     position: { my: "center" },
     width: $(window).width() - 32,
@@ -17,16 +17,9 @@ $(document).ready(function() {
 
   $( ".coordinates-btn, .menu-location" ).on("click", function()  {
     city.dialog("open");
-    setTimeout(() => {
-      console.log(city.dialog());
-      $('.ui-widget-overlay').on('click', function() {
-        const zIndex = $(this).css('z-index');
-        console.log(zIndex);
-      });
-    }, 0);
   });
 
-  const menu = $('#dialog-menu').dialog({
+  menu = $('#dialog-menu').dialog({
     ...dialogConfig,
     width: 247,
     close: () => closeDialog('.footer-item--menu'),
@@ -34,9 +27,22 @@ $(document).ready(function() {
 
   $( ".footer-item--menu" ).on( "click", function() {
     openDialog(menu, $(this));
+    setTimeout(() => {
+      let currentOverlay, currentZIndex = 0;
+      $('.ui-widget-overlay').each((i, el) => {
+        const zIndex = $(el).css('z-index');
+        if (+zIndex > currentZIndex) {
+          currentOverlay = $(el);
+          currentZIndex = +zIndex;
+        }
+      });
+      currentOverlay.on('click', function() {
+        menu.dialog( "close" );
+      });
+    }, 0);
   });
 
-  const money = $('#dialog-money').dialog({
+  money = $('#dialog-money').dialog({
     ...dialogConfig,
     close: () => {
       dialogConfig.close();
@@ -85,27 +91,22 @@ $(document).ready(function() {
   });
 });
 
+function closeOthers() {
+}
+
 function openDialog(dialog, trigger) {
+  [pay, menu, money].forEach(current => {
+    const isOpen = current.dialog( "isOpen" );
+    if (isOpen) {
+      current.dialog( "close" );
+    }
+  });
   dialog.dialog( "open" );
   trigger.addClass('footer-item--active');
 }
 
 function closeDialog(menuItemSelector) {
-  // removeDisableFormBody();
   $(menuItemSelector).removeClass('footer-item--active');
-}
-
-function removeDisableFormBody() {
-  // let isSomeDialogDisplay = false;
-  // $('body').find('.dialog').each(function() {
-  //   if ($(this).dialog( "isOpen" )) {
-  //     isSomeDialogDisplay = true;
-  //   }
-  // });
-
-  // if (!isSomeDialogDisplay) {
-  //   $('body').removeClass('disable');
-  // }
 }
 
 function submitPay() {

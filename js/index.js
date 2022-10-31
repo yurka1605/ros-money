@@ -299,6 +299,5 @@ function setFinalSumm() {
 function setActiveMenuItem(id) {
   $('.menu-item').removeClass('menu-item--active');
   const $link = $(`.menu-item a[href="${id}"]`);
-  console.log($link);
   $link.parent().addClass('menu-item--active');
 }
