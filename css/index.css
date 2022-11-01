@@ -185,3 +185,7 @@ textarea {
   background: #E30016;
   border-radius: 50%;
 }
+
+.money-form {
+  max-height: calc(100vh - 98px - var(--header-height) - var(--footer-height));
+}

@@ -114,7 +114,9 @@
 .ui-dialog[aria-describedby="dialog-city"] {
   top: calc(var(--header-height) + 53px)!important;
   max-width: 100%;
+  max-height: calc(100vh - var(--header-height) - 106px - var(--footer-height));
   background: #FFFFFF;
+  overflow: auto;
   padding: 0;
 }
 .ui-dialog[aria-describedby="dialog-city"] .ui-widget-content {
@@ -131,6 +133,7 @@
   border-radius: 0!important;
   max-width: 100%;
   height: calc(100vh - var(--header-height) - var(--footer-height) + 7px)!important;
+  overflow: auto;
   padding: 0;
 }
 .ui-dialog[aria-describedby="dialog-menu"] .ui-dialog-titlebar {
@@ -262,7 +265,7 @@
 .ui-dialog[aria-describedby="dialog-money"] .ui-widget-content {
   padding: 0 16px;
   padding-bottom: 20px;
-  min-height: calc(100vh - var(--header-height) - var(--footer-height) - 28px)!important;
+  /* min-height: calc(100vh - var(--header-height) - var(--footer-height) - 28px)!important; */
   overflow-x: hidden;
 }
 

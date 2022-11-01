@@ -6,15 +6,15 @@ const blocks = [
   'answer',
 ];
 $(document).ready(function() {
-  $("html, body").on('touchstart', touchStart);
-  $("html, body").on('touchmove', function(e) {
+  $(".block").on('touchstart', touchStart);
+  $(".block").on('touchmove', function(e) {
     if (e.cancelable) {
       e.preventDefault();
       e.stopPropagation();
     }
   });
 
-  $("html, body").on('touchend', function(e) {
+  $(".block").on('touchend', function(e) {
     if (disabled) {
       return;
     }
