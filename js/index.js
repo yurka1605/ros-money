@@ -55,12 +55,22 @@ $(document).ready(function() {
       const link = $(this).attr('href');
       if (link && link !== '#') {
         setActiveMenuItem(link);
-        $("html, body").animate({
-          scrollTop: $($(this).attr('href')).offset().top + "px"
-        }, {
-            duration: 500,
-            easing: "swing"
-        });
+        let scrollTop = 0;
+
+        if (link !== "#calculator") {
+          const windowHeight = $(window).outerHeight();
+          const blockHeight = $(link).outerHeight();
+          const blockName = link.replace('#', '');
+          const maxScroll = getMaxScroll(blocks.findIndex(block => block === blockName));
+          const diffHeight = Math.abs(blockHeight - windowHeight);
+          scrollTop = diffHeight > 0 ? maxScroll - diffHeight : maxScroll;
+        }
+
+        $("#calculator").animate(
+          {"margin-top":`-${scrollTop}px`},
+          300, 
+          "linear",
+        );
       }
     });
   });
@@ -82,19 +92,7 @@ function calcScrollTop(top, isMoveToBottom, blockId) {
   const $block = $('#' + blocks[blockId]);
   const blockHeight = $block.outerHeight();
   const windowHeight = $(window).outerHeight();
-  let maxScroll = 0;
-  blocks.forEach((el, i) => {
-    if (i <= blockId) {
-      const elHeight = $(`#${el}`).outerHeight();
-      if (i === 0) {
-        if (elHeight > windowHeight) {
-          maxScroll += elHeight - windowHeight;
-        } 
-      } else {
-        maxScroll += elHeight;
-      }
-    }
-  });
+  const maxScroll = getMaxScroll(blockId);
 
   if (isMoveToBottom) {
     const nextBlockId = blocks[blockId + 1];
@@ -109,6 +107,25 @@ function calcScrollTop(top, isMoveToBottom, blockId) {
       return maxScroll - (blockHeight - windowHeight);
     }
   }
+}
+
+function getMaxScroll(blockId) {
+  const windowHeight = $(window).outerHeight();
+  let maxScroll = 0;
+  blocks.forEach((el, i) => {
+    if (i <= blockId) {
+      const elHeight = $(`#${el}`).outerHeight();
+      if (i === 0) {
+        if (elHeight > windowHeight) {
+          maxScroll += elHeight - windowHeight;
+        } 
+      } else {
+        maxScroll += elHeight;
+      }
+    }
+  });
+
+  return maxScroll;
 }
 
 function touchStart(e) {
