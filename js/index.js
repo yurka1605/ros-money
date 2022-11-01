@@ -1,4 +1,10 @@
 let start, disabled;
+const blocks = [
+  'calculator',
+  'stocks',
+  'feedbacks',
+  'answer',
+];
 $(document).ready(function() {
   $("html, body").on('touchstart', touchStart);
   $("html, body").on('touchmove', function(e) {
@@ -18,39 +24,22 @@ $(document).ready(function() {
         return;
       }
 
-      const $block = getCurrentBlock();
-      const blockPos = {
-        top: Math.floor($block.offset().top),
-        bottom: Math.floor($block.offset().top + $block.outerHeight()),
-      };
-      const scrollPos = {
-        top: Math.floor($(window).scrollTop()),
-        bottom: Math.floor($(window).scrollTop() + $(window).outerHeight()),
-      };
-
-      let scrollTop;
-      if (touchLengthY > 0) {
-        scrollTop = blockPos.bottom > scrollPos.bottom ? 
-          scrollPos.top + Math.abs(blockPos.bottom - scrollPos.bottom) : 
-          $($block.next()).offset().top;
-      } else {
-        scrollTop = blockPos.top < scrollPos.top ?
-          blockPos.top :
-          $($block.prev()).offset().top;
-      }
-
+      const scrollTop = calcScrollTop(
+        Math.abs(+$('#calculator').css('margin-top').replace('px', '')), 
+        touchLengthY > 0,
+        getCurrentBlockId(),
+      );
       disabled = true;
 
-      const duration = Math.abs($(window).scrollTop() - scrollTop) > 200 ? 300 : 100;
-  
-      $("html, body").animate({scrollTop: scrollTop + "px"}, {
-        duration,
-        easing: "linear",
-        complete: function() {
-          setActiveMenuItem('#' + getCurrentBlock().attr('id'));
+      $("#calculator").animate(
+        {"margin-top":`-${scrollTop}px`}, 
+        300, 
+        "linear", 
+        function() {
+          setActiveMenuItem('#' + $(`#${blocks[getCurrentBlockId()]}`).attr('id'));
           disabled = false;
-        },
-      });
+	      }
+      );
     });
 
   initRangeSliders();
@@ -77,14 +66,50 @@ $(document).ready(function() {
   });
 
   $('.header img').on('click', () => {
-    $("html, body").animate({
-      scrollTop: $('#calculator').offset().top + "px"
-    }, {
-      duration: 500,
-      easing: "swing"
-    });
+    $("#calculator").animate(
+      {'margin-top': '0px'}, 
+      300, 
+      "linear", 
+      function() {
+        setActiveMenuItem('#calculator');
+        disabled = false;
+      }
+    );
   });
 });
+
+function calcScrollTop(top, isMoveToBottom, blockId) {
+  const $block = $('#' + blocks[blockId]);
+  const blockHeight = $block.outerHeight();
+  const windowHeight = $(window).outerHeight();
+  let maxScroll = 0;
+  blocks.forEach((el, i) => {
+    if (i <= blockId) {
+      const elHeight = $(`#${el}`).outerHeight();
+      if (i === 0) {
+        if (elHeight > windowHeight) {
+          maxScroll += elHeight - windowHeight;
+        } 
+      } else {
+        maxScroll += elHeight;
+      }
+    }
+  });
+
+  if (isMoveToBottom) {
+    const nextBlockId = blocks[blockId + 1];
+    return top < maxScroll || !nextBlockId ?
+      maxScroll :
+      maxScroll + windowHeight;
+  } else {
+    const prevBlockId = blocks[blockId - 1];
+    if (prevBlockId && (top !== maxScroll || blockHeight === windowHeight)) {
+      return maxScroll - blockHeight;
+    } else {
+      return maxScroll - (blockHeight - windowHeight);
+    }
+  }
+}
 
 function touchStart(e) {
   if (e.cancelable) {
@@ -97,21 +122,10 @@ function touchStart(e) {
   }
 }
 
-function getCurrentBlock() {
-  let $block;
-  $('.block').each(function () {
-    const $this = $(this);
-    const top = $this.offset().top;
-    const middleBlock = top + $this.outerHeight() / 2;
-    const scrollPosTop = $(window).scrollTop();
-    const scrollPosBottom = $(window).scrollTop() + $(window).height();
-    const isCurrentBlock = middleBlock > scrollPosTop && middleBlock < scrollPosBottom;
-    if (isCurrentBlock) {
-      $block = $this;
-    }
-  });
-
-  return $block;
+function getCurrentBlockId() {
+  const offset = Math.abs(+$('#calculator').css('margin-top').replace('px', ''));
+  const height = $(window).outerHeight();
+  return offset === 0 ? 0 : Math.floor(offset / height);
 }
 
 function initSelects() {
