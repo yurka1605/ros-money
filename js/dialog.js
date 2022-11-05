@@ -15,7 +15,7 @@ $(document).ready(function() {
     width: $(window).width() - 32,
   });
 
-  $( ".coordinates-btn, .menu-location" ).on("click", function()  {
+  $( ".coordinates-btn, .menu-location" ).on('touch click', function()  {
     city.dialog("open");
   });
 
@@ -25,7 +25,7 @@ $(document).ready(function() {
     close: () => closeDialog('.footer-item--menu'),
   });
 
-  $( ".footer-item--menu" ).on( "click", function() {
+  $( ".footer-item--menu" ).on( 'touch click', function() {
     openDialog(menu, $(this));
     setTimeout(() => {
       let currentOverlay, currentZIndex = 0;
@@ -36,7 +36,7 @@ $(document).ready(function() {
           currentZIndex = +zIndex;
         }
       });
-      currentOverlay.on('click', function() {
+      currentOverlay.on('touch click', function() {
         menu.dialog( "close" );
       });
     }, 0);
@@ -50,12 +50,12 @@ $(document).ready(function() {
     },
   });
 
-  $( ".footer-item--money, .calc-submit" ).on( "click", function(e) {
+  $( ".footer-item--money, .calc-submit" ).on( 'touch click', function(e) {
     e.preventDefault();
     openDialog(money, $(this));
   });
 
-  $('.calc-change').on('click', function() {
+  $('.calc-change').on('touch click', function() {
     money.dialog("close");
     $("html, body").animate({
       scrollTop: $('#calculator').offset().top + "px"
@@ -65,7 +65,7 @@ $(document).ready(function() {
     });
   });
 
-  $('.calc-date__btn button').on('click', submitMoney);
+  $('.calc-date__btn button').on('touch click', submitMoney);
 
   pay = $('#dialog-pay').dialog({
     ...dialogConfig,
@@ -76,7 +76,7 @@ $(document).ready(function() {
     },
   });
 
-  $( ".footer-item--pay" ).on( "click", function(e) {
+  $( ".footer-item--pay" ).on( 'touch click', function(e) {
     e.preventDefault();
     openDialog(pay, $(this));
   });

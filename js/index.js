@@ -50,7 +50,7 @@ $(document).ready(function() {
   initSelects();
 
   $('.menu-item a').each(function() {
-    $(this).on('click', function(e) {
+    $(this).on('touchend click', function(e) {
       e.preventDefault();
       const link = $(this).attr('href');
       if (link && link !== '#') {
@@ -75,7 +75,7 @@ $(document).ready(function() {
     });
   });
 
-  $('.header img').on('click', () => {
+  $('.header img').on('touchend click', () => {
     $("#calculator").animate(
       {'margin-top': '0px'}, 
       300, 
@@ -96,7 +96,8 @@ function calcScrollTop(top, isMoveToBottom, blockId) {
 
   if (isMoveToBottom) {
     const nextBlockId = blocks[blockId + 1];
-    return top < maxScroll || !nextBlockId ?
+    const diff = maxScroll - top;
+    return diff > 20 || !nextBlockId ?
       maxScroll :
       maxScroll + windowHeight;
   } else {
@@ -129,10 +130,10 @@ function getMaxScroll(blockId) {
 }
 
 function touchStart(e) {
-  if (e.cancelable) {
-    e.preventDefault();
-    e.stopPropagation();
-  }
+  // if (e.cancelable) {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  // }
   start = {
     y: e.originalEvent.touches[0].pageY,
     x: e.originalEvent.touches[0].pageX,
@@ -204,7 +205,7 @@ function initVideos() {
     const $play = $(this).children('.play-btn');
     const $video = $(this).children('video');
 
-    $play.on('click', function () {
+    $play.on('touchend click', function () {
       $video[0].play();
       $video.attr('controls', true);
       $play.hide();
@@ -271,7 +272,7 @@ function initRangeSliders() {
     $this.find('.value').html(value);
   });
 
-  $('.range-slider-value').on('touch click', function() {
+  $('.range-slider-value').on('touchend click', function() {
     $(this)?.parent()?.prev()?.slider(
       'value',
       Number($(this).text().split(' ').slice(0, -1).join(''))

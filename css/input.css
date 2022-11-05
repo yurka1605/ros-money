@@ -62,7 +62,7 @@
   border-color: #E30016;
 }
 
-.input-field.invalid .error {
+.pay-form .input-field.invalid .error {
   display: flex;
 }
 
