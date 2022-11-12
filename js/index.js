@@ -57,7 +57,7 @@ $(document).ready(function() {
         let scrollTop = 0;
 
         if (link !== "#calculator") {
-          const windowHeight = $(window).outerHeight();
+          const windowHeight = $('main').outerHeight();
           const blockHeight = $(link).outerHeight();
           const blockName = link.replace('#', '');
           const maxScroll = getMaxScroll(blocks.findIndex(block => block === blockName));
@@ -90,7 +90,7 @@ $(document).ready(function() {
 function calcScrollTop(top, isMoveToBottom, blockId) {
   const $block = $('#' + blocks[blockId]);
   const blockHeight = $block.outerHeight();
-  const windowHeight = $(window).outerHeight();
+  const windowHeight = $('main').outerHeight();
   const maxScroll = getMaxScroll(blockId);
 
   if (isMoveToBottom) {
@@ -111,7 +111,7 @@ function calcScrollTop(top, isMoveToBottom, blockId) {
 }
 
 function getMaxScroll(blockId) {
-  const windowHeight = $(window).outerHeight();
+  const windowHeight = $('main').outerHeight();
   let maxScroll = 0;
   blocks.forEach((el, i) => {
     if (i <= blockId) {
@@ -139,7 +139,7 @@ function touchStart(e) {
 
 function getCurrentBlockId() {
   const offset = Math.abs(+$('#calculator').css('margin-top').replace('px', ''));
-  const height = $(window).outerHeight();
+  const height = $('main').outerHeight();
   return offset === 0 ? 0 : Math.floor(offset / height);
 }
 
