@@ -7,13 +7,16 @@
   padding-bottom: 0;
   margin-top: 16px;
 }
+.carousel-feedbacks .slick-dots {
+  bottom: -15px;
+}
 
 .feedback-list {
   display: grid;
   grid-template-columns: calc((100% - 17px) / 2) calc((100% - 17px) / 2);
   column-gap: 17px;
   row-gap: 50px;
-  padding: 50px 0 20px 0;
+  padding: 35px 0 20px 0;
 }
 
 .feedback-item {
