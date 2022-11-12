@@ -7,14 +7,14 @@ const blocks = [
 ];
 $(document).ready(function() {
   $(".block").on('touchstart', touchStart);
-  $(".block").on('touchmove', function(e) {
-    if (e.cancelable) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  });
+  // $(".block").on('touchmove', function(e) {
+  //   if (e.cancelable) {
+  //     e.preventDefault();
+  //     e.stopPropagation();
+  //   }
+  // });
 
-  $(".block").on('touch', function(e) {
+  $(".block").on('touchend', function(e) {
     if (disabled) {
       return;
     }
