@@ -21,16 +21,16 @@
   font-size: 20px;
   line-height: 19px;
   font-family: 'Gotham Pro';
-  font-weight: 500;
+  font-weight: 400;
   color: #F2F2F2;
-  max-width: calc(100% - 100px);
+  max-width: calc(100% - 84px);
   z-index: 1;
 }
 
 .main-banner::after {
   content: '';
   position: absolute;
-  right: -32px;
+  right: -35px;
   width: 224px;
   height: 80px;
   background-image: url('../../img/bg-main.png');
