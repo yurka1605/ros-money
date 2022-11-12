@@ -116,6 +116,7 @@ function getMaxScroll(blockId) {
     if (i <= blockId) {
       const elHeight = $(`#${el}`).outerHeight();
       if (i === 0) {
+        alert(`elHeight: ${elHeight} > windowHeight: ${windowHeight}`);
         if (elHeight > windowHeight) {
           maxScroll += elHeight - windowHeight;
         }
