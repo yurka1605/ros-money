@@ -22,7 +22,7 @@
 }
 
 .carousel-stock .slick-slide {
-  margin: 16px 0px;
+  margin: 16px 0px 5px 0px;
 }
 
 .stock-footer {
@@ -46,7 +46,7 @@
 .suggestion-list {
   display: grid;
   row-gap: 8px;
-  margin-top: 24px;
+  margin-top: 12px;
   margin-bottom: 3px;
 }
 
