@@ -96,7 +96,7 @@ function calcScrollTop(top, isMoveToBottom, blockId) {
   if (isMoveToBottom) {
     const nextBlockId = blocks[blockId + 1];
     const diff = maxScroll - top;
-    return diff > 20 || !nextBlockId ?
+    return diff > 0 || !nextBlockId ?
       maxScroll :
       maxScroll + windowHeight;
   } else {
@@ -115,7 +115,6 @@ function getMaxScroll(blockId) {
   blocks.forEach((el, i) => {
     if (i <= blockId) {
       const elHeight = $(`#${el}`).outerHeight();
-      const blockContainerHeight = $(`#${el} .block-container`).outerHeight() + 55 + 72;
       if (i === 0) {
         if (elHeight > windowHeight) {
           maxScroll += elHeight - windowHeight;
