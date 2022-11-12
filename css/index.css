@@ -29,7 +29,6 @@ body {
 
 main {
   height: 100vh;
-  padding-bottom: 80px;
   overflow: hidden;
   transform: translateY(0);
   transition: all 0.3s linear;
