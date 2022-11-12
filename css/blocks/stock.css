@@ -7,6 +7,10 @@
   margin-bottom: 24px;
 }
 
+.carousel-stock .slick-dots {
+  bottom: -20px;
+}
+
 .stock-header {
   position: relative;
   background: #194EF3;
@@ -17,7 +21,7 @@
 }
 
 #stocks h2.stocks-h2 {
-  padding-top: 5px;
+  padding-top: 0;
 }
 
 .stock-header img {
@@ -61,7 +65,7 @@
 .suggestion-item {
   display: flex;
   align-items: center;
-  padding: 16px;
+  padding: 14px;
   background: #FFFFFF;
   border-radius: 4px;
 }

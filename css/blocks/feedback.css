@@ -8,7 +8,7 @@
   margin-top: 16px;
 }
 .carousel-feedbacks .slick-dots {
-  bottom: -15px;
+  bottom: -10px;
 }
 
 .feedback-list {
@@ -16,7 +16,7 @@
   grid-template-columns: calc((100% - 17px) / 2) calc((100% - 17px) / 2);
   column-gap: 17px;
   row-gap: 50px;
-  padding: 35px 0 20px 0;
+  padding: 30px 0 15px 0;
 }
 
 .feedback-item {
