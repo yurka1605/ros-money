@@ -92,7 +92,7 @@ function calcScrollTop(top, isMoveToBottom, blockId) {
   const blockHeight = $block.outerHeight();
   const windowHeight = $('body').outerHeight();
   const maxScroll = getMaxScroll(blockId);
-
+  alert(`top: ${top}`);
   if (isMoveToBottom) {
     const nextBlockId = blocks[blockId + 1];
     const diff = maxScroll - top;
