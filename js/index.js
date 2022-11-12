@@ -7,7 +7,6 @@ const blocks = [
 ];
 $(document).ready(function() {
   $(".block").on('touchstart', touchStart);
-  // $(".block").on('touchmove', function(e) {
   //   if (e.cancelable) {
   //     e.preventDefault();
   //     e.stopPropagation();
@@ -130,10 +129,6 @@ function getMaxScroll(blockId) {
 }
 
 function touchStart(e) {
-  // if (e.cancelable) {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  // }
   start = {
     y: e.originalEvent.touches[0].pageY,
     x: e.originalEvent.touches[0].pageX,
