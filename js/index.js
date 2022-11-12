@@ -119,9 +119,9 @@ function getMaxScroll(blockId) {
       if (i === 0) {
         if (elHeight > windowHeight) {
           maxScroll += elHeight - windowHeight;
-        } 
+        }
       } else {
-        maxScroll += elHeight;
+        maxScroll += elHeight + (i === blocks.length - 1 ? 72 : 0);
       }
     }
   });
