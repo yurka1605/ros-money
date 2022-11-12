@@ -14,7 +14,7 @@ $(document).ready(function() {
     }
   });
 
-  $(".block").on('touchend', function(e) {
+  $(".block").on('touch', function(e) {
     if (disabled) {
       return;
     }
@@ -50,7 +50,7 @@ $(document).ready(function() {
   initSelects();
 
   $('.menu-item a').each(function() {
-    $(this).on('touchend click', function(e) {
+    $(this).on('touch click', function(e) {
       e.preventDefault();
       const link = $(this).attr('href');
       if (link && link !== '#') {
@@ -75,7 +75,7 @@ $(document).ready(function() {
     });
   });
 
-  $('.header img').on('touchend click', () => {
+  $('.header img').on('touch click', () => {
     $("#calculator").animate(
       {'margin-top': '0px'}, 
       300, 
@@ -205,7 +205,7 @@ function initVideos() {
     const $play = $(this).children('.play-btn');
     const $video = $(this).children('video');
 
-    $play.on('touchend click', function () {
+    $play.on('touch click', function () {
       $video[0].play();
       $video.attr('controls', true);
       $play.hide();
@@ -272,7 +272,7 @@ function initRangeSliders() {
     $this.find('.value').html(value);
   });
 
-  $('.range-slider-value').on('touchend click', function() {
+  $('.range-slider-value').on('touch click', function() {
     $(this)?.parent()?.prev()?.slider(
       'value',
       Number($(this).text().split(' ').slice(0, -1).join(''))
