@@ -242,11 +242,10 @@
   top: var(--header-height)!important;
   border-radius: 0!important;
   min-width: 100%;
-  min-height: calc(100vh - var(--header-height));
-  max-height: calc(100vh - var(--header-height));
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
+  max-height: calc(100vh - var(--header-height) - var(--footer-height));
   overflow-y: auto;
   padding: 0;
-  padding-bottom: var(--footer-height);
   background: #F9F9F9;
 }
 .ui-dialog[aria-describedby="dialog-pay"] .ui-dialog-titlebar,
