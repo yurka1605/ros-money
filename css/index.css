@@ -59,6 +59,10 @@ body.disable {
   overflow: hidden;
 }
 
+.block:last-child {
+  padding-bottom: calc(var(--footer-height) * 2);
+}
+
 .block h2 {
   padding-top: 20px;
   font-size: 22px;
