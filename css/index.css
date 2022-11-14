@@ -24,7 +24,7 @@ body {
   background: #F5F5F5;
   overflow: hidden;
   /* touch-action: none; */
-  height: 100vh;
+  height: 100%;
 }
 
 #main {
@@ -56,7 +56,7 @@ body.disable {
   display: block;
   margin: 0 auto;
   width: calc(100% - 32px);
-  min-height: 100vh;
+  min-height: 100%;
   padding: var(--header-height) 0 var(--footer-height) 0;
   max-width: 100vw;
   overflow: hidden;
@@ -223,5 +223,5 @@ textarea {
 }
 
 .money-form {
-  /* max-height: calc(100vh - 98px - var(--header-height) - var(--footer-height)); */
+  /* max-height: calc(100% - 98px - var(--header-height) - var(--footer-height)); */
 }
