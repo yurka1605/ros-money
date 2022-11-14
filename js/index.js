@@ -6,40 +6,56 @@ const blocks = [
   'answer',
 ];
 $(document).ready(function() {
-  $(".block").on('touchstart', touchStart);
-  //   if (e.cancelable) {
-  //     e.preventDefault();
-  //     e.stopPropagation();
-  //   }
-  // });
-
-  $(".block").on('touchend', function(e) {
-    if (disabled) {
+  const hummerBody = new Hammer(document.getElementsByTagName('body')[0]);
+  hummerBody.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+  hummerBody.on('swipeup swipedown', (ev) => {
+    if (disabled || Math.abs(ev.deltaY) < 10) {
       return;
     }
-      const touchLengthY = start.y - e.originalEvent.changedTouches[0].pageY;
-      const touchLengthX = start.x - e.originalEvent.changedTouches[0].pageX;
-      if (Math.abs(touchLengthY) < 10 || Math.abs(touchLengthX) > 50) {
-        return;
+
+    const scrollTop = calcScrollTop(
+      Math.abs(+$('#calculator').css('margin-top').replace('px', '')), 
+      ev.type === 'swipeup',
+      getCurrentBlockId(),
+    );
+    disabled = true;
+
+    $("#calculator").animate(
+      {"margin-top":`-${scrollTop}px`}, 
+      300, 
+      "linear", 
+      function() {
+        setActiveMenuItem('#' + $(`#${blocks[getCurrentBlockId()]}`).attr('id'));
+        disabled = false;
       }
+    );
+  })
+  // $(".block").on('touchstart', touchStart);
 
-      const scrollTop = calcScrollTop(
-        Math.abs(+$('#calculator').css('margin-top').replace('px', '')), 
-        touchLengthY > 0,
-        getCurrentBlockId(),
-      );
-      disabled = true;
+  // $(".block").on('touchend', function(e) {
+  //     const touchLengthY = start.y - e.originalEvent.changedTouches[0].pageY;
+  //     const touchLengthX = start.x - e.originalEvent.changedTouches[0].pageX;
+  //     if (Math.abs(touchLengthY) < 10 || Math.abs(touchLengthX) > 50 || disabled) {
+  //       return;
+  //     }
 
-      $("#calculator").animate(
-        {"margin-top":`-${scrollTop}px`}, 
-        300, 
-        "linear", 
-        function() {
-          setActiveMenuItem('#' + $(`#${blocks[getCurrentBlockId()]}`).attr('id'));
-          disabled = false;
-	      }
-      );
-    });
+  //     const scrollTop = calcScrollTop(
+  //       Math.abs(+$('#calculator').css('margin-top').replace('px', '')), 
+  //       touchLengthY > 0,
+  //       getCurrentBlockId(),
+  //     );
+  //     disabled = true;
+
+  //     $("#calculator").animate(
+  //       {"margin-top":`-${scrollTop}px`}, 
+  //       300, 
+  //       "linear", 
+  //       function() {
+  //         setActiveMenuItem('#' + $(`#${blocks[getCurrentBlockId()]}`).attr('id'));
+  //         disabled = false;
+	//       }
+  //     );
+  //   });
 
   initRangeSliders();
   initSlick();

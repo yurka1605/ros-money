@@ -23,7 +23,7 @@ body {
   color: #270205;
   background: #F5F5F5;
   overflow: hidden;
-  touch-action: none;
+  /* touch-action: none; */
   height: 100vh;
 }
 
