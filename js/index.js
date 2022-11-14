@@ -6,25 +6,29 @@ const blocks = [
   'answer',
 ];
 $(document).ready(function() {
-  const hummerBody = new Hammer(document.getElementsByTagName('main')[0]);
+  const hummerBody = new Hammer(document.getElementById('main'));
   hummerBody.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
   hummerBody.on('swipeup swipedown', (ev) => {
     if (disabled || Math.abs(ev.deltaY) < 10) {
       return;
     }
 
-    const transform = $('#calculator').css('transform').split(',');
     const scrollTop = calcScrollTop(
-      Math.abs(+transform[transform.length - 1].replace(' ', '').replace(')', '')), 
+      getCurrentPosition(), 
       ev.type === 'swipeup',
       getCurrentBlockId(),
     );
+
     disabled = true;
-    $("#calculator, #stocks, #feedbacks, #answer").css('-webkit-transform', `matrix(1, 0, 0, 1, 0, -${scrollTop})`);
-    $("#calculator, #stocks, #feedbacks, #answer").css('-moz-transform', `matrix(1, 0, 0, 1, 0, -${scrollTop})`); 
-    $("#calculator, #stocks, #feedbacks, #answer").css('transform', `matrix(1, 0, 0, 1, 0, -${scrollTop})`);
-    setActiveMenuItem('#' + $(`#${blocks[getCurrentBlockId()]}`).attr('id'));
-    disabled = false;
+    $("#main").css({
+      '-webkit-transform':  ` matrix(1, 0, 0, 1, 0, -${scrollTop})`,
+      '-moz-transform':  ` matrix(1, 0, 0, 1, 0, -${scrollTop})`,
+      'transform': ` matrix(1, 0, 0, 1, 0, -${scrollTop})`,
+    });
+    setTimeout(() => {
+      setActiveMenuItem('#' + $(`#${blocks[getCurrentBlockId()]}`).attr('id'));
+      disabled = false;
+    }, 300);
   });
 
   initRangeSliders();
@@ -120,8 +124,13 @@ function touchStart(e) {
   }
 }
 
+function getCurrentPosition() {
+  const transform = $('#main').css('transform').split(',');
+  return Math.abs(+transform[transform.length - 1].replace(' ', '').replace(')', ''));
+}
+
 function getCurrentBlockId() {
-  const offset = Math.abs(+$('#calculator').css('margin-top').replace('px', ''));
+  const offset = getCurrentPosition();
   const height = $('body').outerHeight();
   return offset === 0 ? 0 : Math.floor(offset / height);
 }
