@@ -6,7 +6,7 @@ const blocks = [
   'answer',
 ];
 $(document).ready(function() {
-  const hummerBody = new Hammer(document.getElementsByTagName('body')[0]);
+  const hummerBody = new Hammer(document.getElementsByTagName('main')[0]);
   hummerBody.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
   hummerBody.on('swipeup swipedown', (ev) => {
     if (disabled || Math.abs(ev.deltaY) < 10) {
