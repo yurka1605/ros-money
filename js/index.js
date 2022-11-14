@@ -13,16 +13,17 @@ $(document).ready(function() {
       return;
     }
 
+    const blockId = getCurrentBlockId();
     const scrollTop = calcScrollTop(
       getCurrentPosition(), 
       ev.type === 'swipeup',
-      getCurrentBlockId(),
+      blockId,
     );
 
     disabled = true;
     $("#main").css({
       '-webkit-transform':  ` matrix(1, 0, 0, 1, 0, -${scrollTop})`,
-      '-moz-transform':  ` matrix(1, 0, 0, 1, 0, -${scrollTop})`,
+      '-ms-transform':  ` matrix(1, 0, 0, 1, 0, -${scrollTop})`,
       'transform': ` matrix(1, 0, 0, 1, 0, -${scrollTop})`,
     });
     setTimeout(() => {
