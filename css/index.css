@@ -24,14 +24,12 @@ body {
   background: #F5F5F5;
   overflow: hidden;
   /* touch-action: none; */
-  height: 100%;
+  height: 100vh;
 }
 
 #main {
   position: relative;
-  -webkit-transform: matrix(1, 0, 0, 1, 0, 0);
-      -ms-transform: matrix(1, 0, 0, 1, 0, 0);
-          transform: matrix(1, 0, 0, 1, 0, 0);
+  top: 0px;
   -webkit-transition: all 0.3s linear;
        -o-transition: all 0.3s linear;
           transition: all 0.3s linear;
@@ -56,18 +54,10 @@ body.disable {
   display: block;
   margin: 0 auto;
   width: calc(100% - 32px);
-  min-height: 100%;
+  min-height: 100vh;
   padding: var(--header-height) 0 var(--footer-height) 0;
   max-width: 100vw;
   overflow: hidden;
-  -webkit-transform: matrix(1, 0, 0, 1, 0, 0);
-      -ms-transform: matrix(1, 0, 0, 1, 0, 0);
-          transform: matrix(1, 0, 0, 1, 0, 0);
-  -webkit-transition: -webkit-transform .3s linear;
-  transition: -webkit-transform .3s linear;
-  -o-transition: transform .3s linear;
-  transition: transform .3s linear;
-  transition: transform .3s linear, -webkit-transform .3s linear;
 }
 
 .block:last-child {
@@ -223,5 +213,5 @@ textarea {
 }
 
 .money-form {
-  /* max-height: calc(100% - 98px - var(--header-height) - var(--footer-height)); */
+  /* max-height: calc(100vh - 98px - var(--header-height) - var(--footer-height)); */
 }

@@ -21,15 +21,11 @@ $(document).ready(function() {
     );
 
     disabled = true;
-    $("#main").css({
-      '-webkit-transform':  ` matrix(1, 0, 0, 1, 0, -${scrollTop})`,
-      '-ms-transform':  ` matrix(1, 0, 0, 1, 0, -${scrollTop})`,
-      'transform': ` matrix(1, 0, 0, 1, 0, -${scrollTop})`,
-    });
+    $("#main").css('top', `-${scrollTop}px`);
     setTimeout(() => {
       setActiveMenuItem('#' + $(`#${blocks[getCurrentBlockId()]}`).attr('id'));
       disabled = false;
-    }, 300);
+    }, 400);
   });
 
   initRangeSliders();
@@ -48,7 +44,7 @@ $(document).ready(function() {
         let scrollTop = 0;
 
         if (link !== "#calculator") {
-          const windowHeight = $('body').outerHeight();
+          const windowHeight = $(window).height();
           const blockHeight = $(link).outerHeight();
           const blockName = link.replace('#', '');
           const maxScroll = getMaxScroll(blocks.findIndex(block => block === blockName));
@@ -56,11 +52,11 @@ $(document).ready(function() {
           scrollTop = diffHeight > 0 ? maxScroll - diffHeight : maxScroll;
         }
 
-        $("#calculator").animate(
-          {"margin-top":`-${scrollTop}px`},
-          300, 
-          "linear",
-        );
+        $("#main").css('top', `-${scrollTop}px`);
+        setTimeout(() => {
+          setActiveMenuItem('#' + $(`#${blocks[getCurrentBlockId()]}`).attr('id'));
+          disabled = false;
+        }, 400);
       }
     });
   });
@@ -81,12 +77,12 @@ $(document).ready(function() {
 function calcScrollTop(top, isMoveToBottom, blockId) {
   const $block = $('#' + blocks[blockId]);
   const blockHeight = $block.outerHeight();
-  const windowHeight = $('body').outerHeight();
+  const windowHeight = $(window).height();
   const maxScroll = getMaxScroll(blockId);
   if (isMoveToBottom) {
     const nextBlockId = blocks[blockId + 1];
     const diff = maxScroll - top;
-    return diff > 0 || !nextBlockId ?
+    return (diff > 0 && nextBlockId === blocks.length - 1) || !nextBlockId ?
       maxScroll :
       maxScroll + windowHeight;
   } else {
@@ -100,17 +96,13 @@ function calcScrollTop(top, isMoveToBottom, blockId) {
 }
 
 function getMaxScroll(blockId) {
-  const windowHeight = $('body').outerHeight();
+  const windowHeight = $(window).height();
   let maxScroll = 0;
   blocks.forEach((el, i) => {
     if (i <= blockId) {
       const elHeight = $(`#${el}`).outerHeight();
-      if (i === 0) {
-        if (elHeight > windowHeight) {
-          maxScroll += elHeight - windowHeight;
-        }
-      } else {
-        maxScroll += elHeight;
+      if (i !== 0) {
+        maxScroll += elHeight > windowHeight ? elHeight : windowHeight;
       }
     }
   });
@@ -118,21 +110,14 @@ function getMaxScroll(blockId) {
   return maxScroll;
 }
 
-function touchStart(e) {
-  start = {
-    y: e.originalEvent.touches[0].pageY,
-    x: e.originalEvent.touches[0].pageX,
-  }
-}
-
 function getCurrentPosition() {
-  const transform = $('#main').css('transform').split(',');
-  return Math.abs(+transform[transform.length - 1].replace(' ', '').replace(')', ''));
+  const top = $('#main').css('top').replace('px', '');
+  return Math.abs(top);
 }
 
 function getCurrentBlockId() {
   const offset = getCurrentPosition();
-  const height = $('body').outerHeight();
+  const height = $(window).height();
   return offset === 0 ? 0 : Math.floor(offset / height);
 }
 
