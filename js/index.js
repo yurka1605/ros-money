@@ -248,7 +248,7 @@ function initRangeSliders() {
       min,
       max,
       step,
-      change: function(event, {value}) {
+      slide: function(event, {value}) {
         const valueNode = $this?.prev()?.children()?.last('.calc-label__summ');
         if (valueNode) {
           if (separator !== '₽') {
