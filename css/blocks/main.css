@@ -1,5 +1,6 @@
 #calculator {
-  margin-top: 0;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+  transition: transform .3s linear;
 }
 
 .main-banner {

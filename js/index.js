@@ -13,49 +13,19 @@ $(document).ready(function() {
       return;
     }
 
+    const transform = $('#calculator').css('transform').split(',');
     const scrollTop = calcScrollTop(
-      Math.abs(+$('#calculator').css('margin-top').replace('px', '')), 
+      Math.abs(+transform[transform.length - 1].replace(' ', '').replace(')', '')), 
       ev.type === 'swipeup',
       getCurrentBlockId(),
     );
     disabled = true;
-
-    $("#calculator").animate(
-      {"margin-top":`-${scrollTop}px`}, 
-      300, 
-      "linear", 
-      function() {
-        setActiveMenuItem('#' + $(`#${blocks[getCurrentBlockId()]}`).attr('id'));
-        disabled = false;
-      }
-    );
-  })
-  // $(".block").on('touchstart', touchStart);
-
-  // $(".block").on('touchend', function(e) {
-  //     const touchLengthY = start.y - e.originalEvent.changedTouches[0].pageY;
-  //     const touchLengthX = start.x - e.originalEvent.changedTouches[0].pageX;
-  //     if (Math.abs(touchLengthY) < 10 || Math.abs(touchLengthX) > 50 || disabled) {
-  //       return;
-  //     }
-
-  //     const scrollTop = calcScrollTop(
-  //       Math.abs(+$('#calculator').css('margin-top').replace('px', '')), 
-  //       touchLengthY > 0,
-  //       getCurrentBlockId(),
-  //     );
-  //     disabled = true;
-
-  //     $("#calculator").animate(
-  //       {"margin-top":`-${scrollTop}px`}, 
-  //       300, 
-  //       "linear", 
-  //       function() {
-  //         setActiveMenuItem('#' + $(`#${blocks[getCurrentBlockId()]}`).attr('id'));
-  //         disabled = false;
-	//       }
-  //     );
-  //   });
+    $("#calculator, #stocks, #feedbacks, #answer").css('-webkit-transform', `matrix(1, 0, 0, 1, 0, -${scrollTop})`);
+    $("#calculator, #stocks, #feedbacks, #answer").css('-moz-transform', `matrix(1, 0, 0, 1, 0, -${scrollTop})`); 
+    $("#calculator, #stocks, #feedbacks, #answer").css('transform', `matrix(1, 0, 0, 1, 0, -${scrollTop})`);
+    setActiveMenuItem('#' + $(`#${blocks[getCurrentBlockId()]}`).attr('id'));
+    disabled = false;
+  });
 
   initRangeSliders();
   initSlick();
