@@ -61,7 +61,7 @@ body.disable {
 }
 
 .block:last-child {
-  padding-bottom: calc(var(--footer-height) + 80px);
+  /* padding-bottom: calc(var(--footer-height) + 80px); */
 }
 
 .block h2 {
