@@ -13,7 +13,9 @@
   display: block;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
   width: 29px;
   height: 29px;
   border: 3.52px solid #E30016!important;

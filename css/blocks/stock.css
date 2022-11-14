@@ -38,6 +38,8 @@
 }
 
 .stock-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   padding: 22px 40px 35px;
 }
@@ -56,6 +58,7 @@
 }
 
 .suggestion-list {
+  display: -ms-grid;
   display: grid;
   row-gap: 8px;
   margin-top: 12px;
@@ -63,8 +66,12 @@
 }
 
 .suggestion-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding: 14px;
   background: #FFFFFF;
   border-radius: 4px;
@@ -87,12 +94,15 @@
 }
 
 .terms-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   font-weight: 300;
   color: #000000;
 }
 
 .terms-item {
+  display: -ms-grid;
   display: grid;
   row-gap: 4px;
 }

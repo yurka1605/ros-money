@@ -1,15 +1,18 @@
-#calculator {
-  transform: matrix(1, 0, 0, 1, 0, 0);
-  transition: transform .3s linear;
-}
-
 .main-banner {
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   height: 80px;
   padding-left: 14px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#F92539), to(#BF2030));
+  background: -o-linear-gradient(top, #F92539 0%, #BF2030 100%);
   background: linear-gradient(180deg, #F92539 0%, #BF2030 100%);
   color: #FFFFFF;
   border-radius: 12px;
@@ -60,9 +63,15 @@
 }
 
 .calc-label {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .calc-label__text {
@@ -77,8 +86,12 @@
 }
 
 .range-slider-values {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .range-slider-value {
@@ -93,13 +106,18 @@
 }
 
 .notification {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding: 10px 20px;
   margin: 12px 0;
   background: #FFFFFF;
   border: 1px solid #D0E1F4;
-  box-shadow: 0px 3px 6px -1px rgba(39, 2, 5, 0.02);
+  -webkit-box-shadow: 0px 3px 6px -1px rgba(39, 2, 5, 0.02);
+          box-shadow: 0px 3px 6px -1px rgba(39, 2, 5, 0.02);
   border-radius: 4px;
   font-family: 'Gotham Pro';
   font-weight: 300;
@@ -116,16 +134,29 @@
 }
 
 .calc-summary {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   padding: 16px 0;
 }
 
 .calc-summary__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   height: 40px;
 }
 
