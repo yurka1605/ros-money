@@ -891,6 +891,15 @@
       <span>Чат</span>
     </div>
   </footer>
+  <script>
+    (function(){
+      function setHeight() {
+        document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+      }
+      setHeight();
+      window.addEventListener('resize', setHeight);
+    })();
+  </script>
   <script src="./js/libs/moment-with-locales.min.js"></script>
   <script
     src="https://code.jquery.com/jquery-3.6.1.min.js"

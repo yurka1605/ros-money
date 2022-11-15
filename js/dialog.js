@@ -57,12 +57,11 @@ $(document).ready(function() {
 
   $('.calc-change').on('touch click', function() {
     money.dialog("close");
-    $("html, body").animate({
-      scrollTop: $('#calculator').offset().top + "px"
-    }, {
-        duration: 500,
-        easing: "swing"
-    });
+    $("#main").css('top', `0px`);
+    setTimeout(() => {
+      $('.menu-item').removeClass('menu-item--active');
+      $(`.menu-item a[href="#calculator"]`).parent().addClass('menu-item--active');
+    }, 400);
   });
 
   $('.calc-date__btn button').on('touch click', submitMoney);
