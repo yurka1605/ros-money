@@ -6,26 +6,25 @@ const blocks = [
   'answer',
 ];
 $(document).ready(function() {
-  const hummerBody = new Hammer(document.getElementById('main'));
-  hummerBody.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
-  hummerBody.on('swipeup swipedown', (ev) => {
-    if (disabled || Math.abs(ev.deltaY) < 10) {
+  $("#main").on('touchstart', function(e) {
+    start = {
+      y: e.originalEvent.touches[0].pageY,
+      x: e.originalEvent.touches[0].pageX,
+    }
+  });
+  $("#main").on('touchend', function(e) {
+    const touchLengthY = start?.y - e.originalEvent.changedTouches[0].pageY;
+    const touchLengthX = start?.x - e.originalEvent.changedTouches[0].pageX;
+    if (disabled || Math.abs(touchLengthY) < 10 || Math.abs(touchLengthX) > 50) {
       return;
     }
-
-    const blockId = getCurrentBlockId();
     const scrollTop = calcScrollTop(
       getCurrentPosition(), 
-      ev.type === 'swipeup',
-      blockId,
+      touchLengthY > 0,
+      getCurrentBlockId(),
     );
 
-    disabled = true;
-    $("#main").css('top', `-${scrollTop}px`);
-    setTimeout(() => {
-      setActiveMenuItem('#' + $(`#${blocks[getCurrentBlockId()]}`).attr('id'));
-      disabled = false;
-    }, 400);
+    scrollMain(scrollTop);
   });
 
   initRangeSliders();
@@ -52,27 +51,22 @@ $(document).ready(function() {
           scrollTop = diffHeight > 0 ? maxScroll - diffHeight : maxScroll;
         }
 
-        $("#main").css('top', `-${scrollTop}px`);
-        setTimeout(() => {
-          setActiveMenuItem('#' + $(`#${blocks[getCurrentBlockId()]}`).attr('id'));
-          disabled = false;
-        }, 400);
+        scrollMain(scrollTop);
       }
     });
   });
 
-  $('.header img').on('touch click', () => {
-    $("#calculator").animate(
-      {'margin-top': '0px'}, 
-      300, 
-      "linear", 
-      function() {
-        setActiveMenuItem('#calculator');
-        disabled = false;
-      }
-    );
-  });
+  $('.header img').on('touch click', () => scrollMain(0));
 });
+
+function scrollMain(scrollTop) {
+  disabled = true;
+  $("#main").css('top', `-${scrollTop}px`);
+  setTimeout(() => {
+    setActiveMenuItem('#' + $(`#${blocks[getCurrentBlockId()]}`).attr('id'));
+    disabled = false;
+  }, 400);
+}
 
 function calcScrollTop(top, isMoveToBottom, blockId) {
   const $block = $('#' + blocks[blockId]);
